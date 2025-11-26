@@ -1,6 +1,6 @@
 import {NextResponse} from "next/server";
 
-const apartments = [];
+export const apartments = [];
 
 let id = 0;
 
@@ -83,7 +83,6 @@ export async function DELETE(req) {
     apartments.splice(index, 1);
 
     if(index < 0) return Response.json({ message: "doesn't exist" }, { status: 400 });
-    //khsakhdskhd
     return Response.json(true);
 
 }
