@@ -1,3 +1,5 @@
+import {NextResponse} from "next/server";
+
 const apartments = [];
 
 let id = 0;
@@ -19,7 +21,7 @@ export async function GET(req1) {
 
     if (apartments.length < 3) {
         apartments.push({
-
+            id: generateId(),
             address: "Hayezira 13 Petach Tikva",
             rooms: 1,
             floor: 2,
@@ -28,6 +30,7 @@ export async function GET(req1) {
             price: 1800
         });
         apartments.push({
+            id: generateId(),
             address: "Ezel 1 Petach Tikva",
             rooms: 2,
             floor: 1,
@@ -37,6 +40,7 @@ export async function GET(req1) {
         });
 
         apartments.push({
+            id: generateId(),
             address: "Savionim 6 Ariel",
             rooms: 4,
             floor: 3,
@@ -50,7 +54,8 @@ export async function GET(req1) {
 }
 
 export async function POST(req) {
-    const newApartment = req.body;
+    console.log(req.body)
+    const newApartment = await req.json();
     newApartment.id = generateId();
     apartments.push(newApartment);
     return Response.json(newApartment);
@@ -58,7 +63,7 @@ export async function POST(req) {
 }
 
 export async function PUT(req) {
-    const updatedApartment = req.body;
+    const updatedApartment = await req.json();
 
     const index = apartments.findIndex(item => item.id === updatedApartment.id);
     apartments[index] = updatedApartment;
@@ -68,11 +73,17 @@ export async function PUT(req) {
 
 
 export async function DELETE(req) {
-    const id = req.body.id;
+    const reqData = await req.json();
+
+    const id = reqData.id;
+    console.log("data " , id)
 
     const index = apartments.findIndex(item => item.id === id);
-
+    console.log("index = ", index)
     apartments.splice(index, 1);
+
+    if(index < 0) return Response.json({ message: "doesn't exist" }, { status: 400 });
+    //khsakhdskhd
     return Response.json(true);
 
 }
