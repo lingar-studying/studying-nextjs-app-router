@@ -1,5 +1,10 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Box } from "@mui/material";
+import { Roboto } from 'next/font/google';
+
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter';
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +25,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
++        <AppRouterCacheProvider>
+
+        sdads
         {children}
+
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
