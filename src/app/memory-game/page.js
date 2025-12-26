@@ -1,52 +1,13 @@
 import Image from "next/image";
-
 import styles from "./page.module.css";
-import Link from "next/link";
-
 
 export default function Home() {
   return (
     <div className={styles.page}>
 
-
-    <div style = {{border: "2px solid black", width: "400px", height: "700px",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between"
-
-
-    }}>
-
- <h1>Hello Hermelin</h1>
+      <h1>Here will come memory game</h1>
 
       <h2>Home page</h2>
-
-      <a href = {"/pages/draft"} target = "_blank">Draft</a>
-      <a href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </a>
-      <Link href = {"/pages/draft"} target = "_blank">Draft</Link>
-      <Link href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </Link>
-
-        <a href = {"/pages/draft"} target = "_blank">Draft</a>
-      <a href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </a>
-      <Link href = {"/pages/draft"} target = "_blank">Draft</Link>
-      <Link href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </Link>
-
-
-
-    </div>
-     
 
 
       {/* <main className={styles.main}>
