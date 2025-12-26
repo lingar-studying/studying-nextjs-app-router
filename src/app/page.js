@@ -5,51 +5,54 @@ import Link from "next/link";
 
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
+    return (
+        <div className={styles.page}>
 
 
-    <div style = {{border: "2px solid black", width: "400px", height: "700px",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between"
+            <div style={{
+                border: "2px solid black", width: "400px", height: "700px",
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-between"
 
 
-    }}>
+            }}>
 
- <h1>Hello Hermelin</h1>
+                <h1>Basic Client Explanation</h1>
 
-      <h2>Home page</h2>
-
-      <a href = {"/pages/draft"} target = "_blank">Draft</a>
-      <a href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </a>
-      <Link href = {"/pages/draft"} target = "_blank">Draft</Link>
-      <Link href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </Link>
-
-        <a href = {"/pages/draft"} target = "_blank">Draft</a>
-      <a href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </a>
-      <Link href = {"/pages/draft"} target = "_blank">Draft</Link>
-      <Link href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </Link>
+                <h2>This Home page</h2>
+                <p>In Next App Router - everything is working by the folder structure.
+                 See the "DOCS" Explanation for further</p>
 
 
 
-    </div>
-     
+                <a href={"/pages/draft"} target="_blank">Draft</a>
+                <a href={"/pages/memory-game"} target="_blank">
+
+                    Memory Game
+                </a>
+                <Link href={"/pages/draft"} target="_blank">Draft</Link>
+                <Link href={"/pages/memory-game"} target="_blank">
+
+                    Memory Game
+                </Link>
+
+                <a href={"/pages/draft"} target="_blank">Draft</a>
+                <a href={"/pages/memory-game"} target="_blank">
+
+                    Memory Game
+                </a>
+                <Link href={"/pages/draft"} target="_blank">Draft</Link>
+                <Link href={"/pages/memory-game"} target="_blank">
+
+                    Memory Game
+                </Link>
 
 
-      {/* <main className={styles.main}>
+            </div>
+
+
+            {/* <main className={styles.main}>
         <Image
           className={styles.logo}
           src="/next.svg"
@@ -106,6 +109,6 @@ export default function Home() {
           </a>
         </div>
       </main> */}
-    </div>
-  );
+        </div>
+    );
 }
