@@ -1,31 +1,28 @@
-import {Geist, Geist_Mono} from "next/font/google";
+// import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
 
 import {AppRouterCacheProvider} from '@mui/material-nextjs/v16-appRouter';
+import GlobalTheme from "@/app/global-theme";
+import {ThemeProvider} from "@mui/material";
+import {Roboto} from "next/font/google";
 
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
+const roboto = Roboto({
+    weight: ['300', '400', '500', '700'],
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-roboto',
 });
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-});
-
-export const metadata = {
-    title: "Studying Next app router",
-    description: "Understanding how next app-router is working",
-};
-
 export default function RootLayout({children}) {
     return (
-        <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <html lang="en" className={roboto.className}>
+        <body>
         <AppRouterCacheProvider>
+            <ThemeProvider theme = {GlobalTheme}>
+                {children}
 
-            {children}
+
+            </ThemeProvider>
 
         </AppRouterCacheProvider>
         </body>
