@@ -55,6 +55,10 @@ const Page = () => {
 
                     Layout provide outer layout to the component and its children (what reside under it).
                     It's great for menus, and for the website or specific features frame.
+                    <br/>
+                    This is the same concept - you create where you want the "layout.js" file, and wrap with it the children.
+
+                    See the "layout.js" inside the docs - for understand it...
 
 
 

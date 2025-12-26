@@ -19,8 +19,10 @@ export default function RootLayout({children}) {
         <body>
         <AppRouterCacheProvider>
             <ThemeProvider theme = {GlobalTheme}>
+                <p>Here can come the layout of all website... <b>This will be shown in all pages of the app.</b> </p>
                 {children}
 
+                <p>Here will come the footer </p>
 
             </ThemeProvider>
 
