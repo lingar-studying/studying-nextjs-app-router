@@ -53,6 +53,10 @@ const Page = () => {
 
                 <Box component={"p"}>
 
+                    Layout provide outer layout to the component and its children (what reside under it).
+                    It's great for menus, and for the website or specific features frame.
+
+
 
                 </Box>
                 <Box component={"p"}>

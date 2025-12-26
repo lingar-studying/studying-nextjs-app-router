@@ -37,6 +37,9 @@ export default function Home() {
                 <Link href={"/pages/draft"} target="_blank">Draft</Link> |
                 <Link href={"/pages/memory-game"} target="_blank"> Memory Game
                 </Link>
+ |
+                <Link href={"/pages/docs"} target="_blank"> DOCS
+                </Link>
 
 
             </div>
