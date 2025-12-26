@@ -23,7 +23,7 @@ export default function Home() {
                 <p>For example this page is page.js in the root, and the url for it is:
                     http://localhost:3000/</p>
                 <p>Pay attention that you need to pass <b>only one</b> of route.js OR page.js,
-                    beacause if you create them both - next will confused which one to choose. </p>
+                    because if you create them both - next will confused which one to choose. </p>
 
 
                 <h3>Those are links with a html tag</h3>
