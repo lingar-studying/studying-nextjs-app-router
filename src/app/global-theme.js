@@ -4,7 +4,7 @@ import {createTheme} from "@mui/material";
 
 const GlobalTheme = createTheme({
     typography: {
-        fontFamily: 'var(--font-roboto',
+        fontFamily: 'var(--font-roboto)',
     }
 })
 
