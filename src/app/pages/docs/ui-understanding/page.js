@@ -1,7 +1,7 @@
 'use client'
 import {useState} from "react";
 import {Box} from "@mui/material";
-
+import Link from "next/link"
 
 const Page = () => {
 
@@ -88,6 +88,10 @@ const Page = () => {
                 </Box>
                 <Box component={"p"}>
 
+                    Here you can see some <Link href={"ui-understanding/a"}>
+
+                    missing page
+                </Link> and there are a lot of other option.
 
                 </Box>
 
