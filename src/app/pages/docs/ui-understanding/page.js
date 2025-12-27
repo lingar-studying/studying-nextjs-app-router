@@ -95,6 +95,20 @@ const Page = () => {
 
                 </Box>
 
+                <h3>Recommended Working flow</h3>
+
+                <Box component={"p"}>
+                    Since Next is New Way to combine client of React And Server of node js,
+                    at simple level and at the start I recommend to use the route pages mainly as entry point, sort of Lobby.
+                    From there to pass the data to pure client component.
+                    In this way you can use the robust options of the routing options from one side, and from the other side - you continue to work
+                    with react classic way.
+
+                    Remember that we cannot use this pages in "useState" and "useEffect" aren't available in server component.
+
+
+                </Box>
+
 
             </Box>
         </>
