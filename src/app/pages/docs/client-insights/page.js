@@ -19,8 +19,25 @@ const mouseMockData = [
 const Page = () => {
 
 
-    const [selectedMouse, setSelectedMouse] = useState(mouseMockData[0]);
+    const [mouseMockState, setMouseMockState] = useState(mouseMockData);
+    const [selectedMouse, setSelectedMouse] = useState(mouseMockData[2]);
 
+    const onChangeMouse = (ev, id)=>{
+
+        const changeIdx = mouseMockState.findIndex(item=> item.id === id);
+
+        console.log("change idx = ", ev)
+
+        const prop = ev.target.name;
+        let change = mouseMockState[changeIdx];
+        change[prop] = ev.target.value;
+
+        console.log("changes", prop, ev.target.value)
+        const temp = [...mouseMockState];
+        temp[changeIdx] = change;
+
+        setMouseMockState(temp);
+    }
     return (
         <>
             <Box component={"div"} p={"40px"}>
@@ -32,7 +49,7 @@ const Page = () => {
                 <Mouse data = {mouseMockData[0]}/>
 
                 <h3>Mouse with state prop:</h3>
-                <Mouse data = {selectedMouse}/>
+                <Mouse data = {selectedMouse} onChange = {onChangeMouse}/>
 
 
                 <Button variant={"contained"} color={"primary"}
@@ -73,7 +90,7 @@ const Page = () => {
                     </TableHead>
 
                     <TableBody>
-                        {mouseMockData.map((item, idx)=>{
+                        {mouseMockState.map((item, idx)=>{
 
                             return(
                                 <TableRow key={item.id}>
