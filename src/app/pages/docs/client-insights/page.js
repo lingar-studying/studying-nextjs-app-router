@@ -1,6 +1,6 @@
 'use client'
 import {useState} from "react";
-import {Box, Button} from "@mui/material";
+import {Box, Button, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import Mouse from "@/app/client/components/Mouse";
 
 const mouseMockData = [
@@ -50,6 +50,56 @@ const Page = () => {
 
                 >Mouse 3 </Button>
 
+                <Table width={"700px !important"}>
+
+                    <TableHead>
+                        
+                        <TableRow>
+                            <TableCell>
+                                Id
+                            </TableCell>
+                            <TableCell>
+                                Manufacturer
+                            </TableCell>
+                            <TableCell>
+                                Model
+                            </TableCell>
+                            <TableCell>
+                                Price
+                            </TableCell>
+                            
+                        </TableRow>
+
+                    </TableHead>
+
+                    <TableBody>
+                        {mouseMockData.map((item, idx)=>{
+
+                            return(
+                                <TableRow key={item.id}>
+                                    <TableCell>
+                                        {item.id}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.manufacturer}
+                                    </TableCell>
+
+                                    <TableCell>
+                                        {item.model}
+                                    </TableCell>
+
+                                    <TableCell>
+                                        {item.price}
+                                    </TableCell>
+
+
+                                </TableRow>
+                            )
+                        })}
+
+                    </TableBody>
+
+                </Table>
 
             </Box>
         </>
