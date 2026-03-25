@@ -1,6 +1,7 @@
 'use client'
 import {useState} from "react";
-import {Box} from "@mui/material";
+import {Box, Button} from "@mui/material";
+import Mouse from "@/app/client/components/Mouse";
 
 const mouseMockData = [
     { id: 1, manufacturer: "Logitech", model: "M185", price: 49.9, color: "Black", isWireless: true },
@@ -18,6 +19,7 @@ const mouseMockData = [
 const Page = () => {
 
 
+    const [selectedMouse, setSelectedMouse] = useState(mouseMockData[0]);
 
     return (
         <>
@@ -26,7 +28,27 @@ const Page = () => {
 
                 <h2>Client Insights</h2>
 
+                <h3>Simple component: </h3>
+                <Mouse data = {mouseMockData[0]}/>
 
+                <h3>Mouse with state prop:</h3>
+                <Mouse data = {selectedMouse}/>
+
+
+                <Button variant={"contained"} color={"primary"}
+                        onClick = {()=>setSelectedMouse(mouseMockData[0])}
+
+                >Mouse 1 </Button>
+
+                <Button variant={"contained"} color={"success"}
+                        onClick = {()=>setSelectedMouse(mouseMockData[1])}
+
+                >Mouse 2 </Button>
+
+                <Button variant={"contained"} color={"secondary"}
+                        onClick = {()=>setSelectedMouse(mouseMockData[2])}
+
+                >Mouse 3 </Button>
 
 
             </Box>
