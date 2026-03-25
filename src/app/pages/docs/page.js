@@ -16,6 +16,8 @@ export default function Docs() {
             <ol>
                 <li><Link href={`${pathname}/ui-understanding`}>Understanding UI and creating page.</Link></li>
                 <li><Link href={`${pathname}/crud-examples`}>Crud Examples - client (inner), server, DB</Link></li>
+                <li><Link href={`${pathname}/client-insights`}>Client insights(React.JS) </Link></li>
+
 
             </ol>
             <h2>Things to understand in the future </h2>

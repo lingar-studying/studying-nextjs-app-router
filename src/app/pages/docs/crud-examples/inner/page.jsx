@@ -1,5 +1,5 @@
 import {Box} from "@mui/material";
-import ApartmentClient from "@/app/pages/components/ApartmentClient";
+import ApartmentClient from "@/app/client/components/ApartmentClient";
 
 
 export const Inner=()=> {

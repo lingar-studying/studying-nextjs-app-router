@@ -1,7 +1,7 @@
 import {Box} from "@mui/material";
-import ApartmentClient from "@/app/pages/components/ApartmentClient";
-import Apartment2Server from "@/app/pages/components/Apartment2Server";
-import Apartment2DB from "@/app/pages/components/Apartment2DB";
+import ApartmentClient from "@/app/client/components/ApartmentClient";
+import Apartment2Server from "@/app/client/components/Apartment2Server";
+import Apartment2DB from "@/app/client/components/Apartment2DB";
 
 
 export const Inner=()=> {
