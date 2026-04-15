@@ -23,6 +23,11 @@ const Page = () => {
     const [mouseMockState, setMouseMockState] = useState(mouseMockData);
     const [selectedMouse, setSelectedMouse] = useState(mouseMockData[2]);
 
+    const [singleMouse, setSingleMouse] = useState({
+        id: 19, manufacturer: "Corsair", model: "Harpoon ssssss", price: 149.9, color: "Brown", isWireless: true 
+    });
+    
+
     const onChangeMouse = (ev, id)=>{
 
         const changeIdx = mouseMockState.findIndex(item=> item.id === id);
@@ -39,14 +44,17 @@ const Page = () => {
 
         setMouseMockState(temp);
     }
-    let singleMouse = {
-        id: 19, manufacturer: "Corsair", model: "Harpoon ssssss", price: 149.9, color: "Brown", isWireless: true 
-    }
-
+   
     const onChangeSingleMouse = (ev) =>{
         console.log("change single",  ev.target.value)
 
-        singleMouse[ev.target.name] = ev.target.value;
+        //singleMouse[ev.target.name] = ev.target.value;
+
+        const copy = singleMouse;
+        // copy[]
+        setSingleMouse({
+            [ev.target.name] :ev.target.value
+        })
 
     }
 
