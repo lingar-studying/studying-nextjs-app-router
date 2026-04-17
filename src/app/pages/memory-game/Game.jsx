@@ -1,8 +1,10 @@
-
 import React from "react";
 import AlignHorizontalRightIcon from '@mui/icons-material/AlignHorizontalRight';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
+import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import DeveloperBoardIcon from '@mui/icons-material/DeveloperBoard';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import {Box} from "@mui/material";
 
 
@@ -20,12 +22,12 @@ const initialUserMock = {
 
 }
 
-const IconsStore = [AcUnitIcon, AlignHorizontalRightIcon, AlignHorizontalLeftIcon];
+const IconsStore = [AcUnitIcon, AlignHorizontalRightIcon, AlignHorizontalLeftIcon, BeachAccessIcon, DeveloperBoardIcon, SentimentSatisfiedAltIcon];
 
-const Game = (props)=>{
+const Game = (props) => {
 
 
-    return(
+    return (
         <Box component={"div"}>
             <h2>Game</h2>
             <AlignHorizontalLeftIcon/>
