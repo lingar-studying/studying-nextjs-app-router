@@ -1,13 +1,25 @@
-import Image from "next/image";
+import Game from "@/app/pages/memory-game/Game";
+import {Box} from "@mui/material";
 
 export default function Home() {
   return (
-    <div >
+    <Box component={"div"} className={"styles.page"}
+    sx = {{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}
+    >
 
       <h1>Here will come memory game</h1>
 
-      <h2>Home page</h2>
+        <Box component={"div"}>
 
-    </div>
+            <h2>Game Zone</h2>
+
+            <Game/>
+
+        </Box>
+
+
+
+
+    </Box>
   );
 }
