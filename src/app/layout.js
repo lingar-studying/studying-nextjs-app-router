@@ -20,7 +20,7 @@ const roboto = Roboto({
 export default function RootLayout({children}) {
     return (
         <html lang="en" className={roboto.className}>
-        <body>
+        <body suppressHydrationWarning={true}>
         <AppRouterCacheProvider>
             <ThemeProvider theme={GlobalTheme}>
                 <p>Here can come the layout of all website... <b>This will be shown in all pages of the app.</b></p>
