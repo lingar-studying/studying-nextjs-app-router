@@ -6,10 +6,10 @@ import useCardList from "@/app/pages/memory-game/use-card-list";
 
 const Round = ({gridLength, cardLength}) => {
 
-    const length = gridLength*gridLength;
+    const length = gridLength * gridLength;
 
-    const { cardList} = useCardList(gridLength) ||  [];
-    const getIcon =(i)=>{
+    const {cardList, selectCard} = useCardList(gridLength) || [];
+    const getIcon = (i) => {
 
         const IconComp = iconsStore[i];
 
@@ -39,19 +39,31 @@ const Round = ({gridLength, cardLength}) => {
                         alignItems: "center",
                         justifyContent: "center",
                         fontFamily: "san-serif",
+                        backgroundColor: !card.isFlipped && "grey",
 
 
                         fontSize: "6rem"
 
                     }}
                          key={card.key}>
-                        <strong>
-                            {/*{(()=> {*/}
 
-                            {/*   return (i + 1 > gridLength ? length - gridLength : i);*/}
-                            {/*}) ()}*/}
-                            {getIcon(card.iconIndex)}
-                        </strong>
+                        {card.isFlipped ?
+                            <strong>
+                                {/*{(()=> {*/}
+
+                                {/*   return (i + 1 > gridLength ? length - gridLength : i);*/}
+                                {/*}) ()}*/}
+                                {getIcon(card.iconIndex)}
+                            </strong>
+                            :
+                            <Box component={"div"} sx = {{width: "100%", height: "100%",
+                            cursor: "pointer"
+                            ,"&:hover":{backgroundColor: "primary.main"} }}
+
+                                 onClick = {()=>selectCard(card)}
+
+                            />
+                        }
 
                     </Box>
                 ))}
