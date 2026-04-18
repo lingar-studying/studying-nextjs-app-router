@@ -39,11 +39,16 @@ const useCardList = (gridLength)=>{
             funcCardList.push(card2);
         }
 
+        console.log("func card list - " , funcCardList)
+
         //shuffle
         for (let i = funcCardList.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [funcCardList[i], funcCardList[j]] = [funcCardList[j], funcCardList[i]];
         }
+
+        console.log("func card list - after shuffle " , funcCardList)
+
         setCardList(funcCardList);
 
 

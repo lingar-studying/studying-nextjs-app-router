@@ -8,15 +8,10 @@ const Round = ({gridLength, cardLength}) => {
 
     const length = gridLength*gridLength;
 
-    const cardsData = useCardList(gridLength);
+    const { cardList} = useCardList(gridLength) ||  [];
     const getIcon =(i)=>{
 
-        // const IconComp = iconsStore[0];
-        // const IconComp = iconsStore[(i + 1 > gridLength ? length - gridLength : i)];
-
-        const index = (((i +1) % gridLength) + 1)-1;
-        // console.log("index", index, ((i +1) % gridLength) + 1, i)
-        const IconComp = iconsStore[index];
+        const IconComp = iconsStore[i];
 
         return <IconComp fontSize={"50px"}/>
 
@@ -31,11 +26,11 @@ const Round = ({gridLength, cardLength}) => {
                      gap: "50px",
                      padding: 4,
                      width: "fit-content",
-                     border: "2px solid red"
+                     border: "8px double purple"
 
 
                  }}>
-                {Array.from({length: length}).map((_, i) => (
+                {cardList.map((card) => (
 
                     <Box component={"div"} sx={{
                         width: cardLength, height: cardLength,
@@ -49,13 +44,13 @@ const Round = ({gridLength, cardLength}) => {
                         fontSize: "6rem"
 
                     }}
-                         key={i}>
+                         key={card.key}>
                         <strong>
                             {/*{(()=> {*/}
 
                             {/*   return (i + 1 > gridLength ? length - gridLength : i);*/}
                             {/*}) ()}*/}
-                            {getIcon(i)}
+                            {getIcon(card.iconIndex)}
                         </strong>
 
                     </Box>
