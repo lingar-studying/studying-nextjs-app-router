@@ -1,10 +1,26 @@
+'use client'
 import React from 'react';
 import {Box} from "@mui/material";
+import {iconsStore} from "@/app/pages/memory-game/constant-memory-game";
+import useCardList from "@/app/pages/memory-game/use-card-list";
 
 const Round = ({gridLength, cardLength}) => {
 
     const length = gridLength*gridLength;
 
+    const cardsData = useCardList(gridLength);
+    const getIcon =(i)=>{
+
+        // const IconComp = iconsStore[0];
+        // const IconComp = iconsStore[(i + 1 > gridLength ? length - gridLength : i)];
+
+        const index = (((i +1) % gridLength) + 1)-1;
+        // console.log("index", index, ((i +1) % gridLength) + 1, i)
+        const IconComp = iconsStore[index];
+
+        return <IconComp fontSize={"50px"}/>
+
+    }
     return (
         <>
             <Box component={"div"}
@@ -35,7 +51,11 @@ const Round = ({gridLength, cardLength}) => {
                     }}
                          key={i}>
                         <strong>
-                            {i + 1}
+                            {/*{(()=> {*/}
+
+                            {/*   return (i + 1 > gridLength ? length - gridLength : i);*/}
+                            {/*}) ()}*/}
+                            {getIcon(i)}
                         </strong>
 
                     </Box>
