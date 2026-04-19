@@ -26,7 +26,7 @@ const Game = (props) => {
             <h2>Game</h2>
             <AlignHorizontalLeftIcon/>
 
-            <Round  cardLength = {200} gridLength={6}/>
+            <Round  cardLength = {200} gridLength={5}/>
         </Box>
     )
 }

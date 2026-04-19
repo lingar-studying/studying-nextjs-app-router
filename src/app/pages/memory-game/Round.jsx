@@ -1,14 +1,21 @@
 'use client'
-import React from 'react';
+import React, {useState} from 'react';
 import {Box} from "@mui/material";
-import {iconsStore} from "@/app/pages/memory-game/constant-memory-game";
+import {iconsStore, PPR} from "@/app/pages/memory-game/constant-memory-game";
 import useCardList from "@/app/pages/memory-game/use-card-list";
 
 const Round = ({gridLength, cardLength}) => {
 
     const length = gridLength * gridLength;
+    const [pointsPerRound, setPointsPerRound] = useState(PPR)
+    const decreasePoints = ()=>{
+        setPointsPerRound(pointsPerRound-1);
+    }
 
-    const {cardList, selectCard} = useCardList(gridLength) || [];
+
+    const {cardList, selectCard} = useCardList(gridLength, decreasePoints) || [];
+
+
     const getIcon = (i) => {
 
         const IconComp = iconsStore[i];
@@ -18,6 +25,7 @@ const Round = ({gridLength, cardLength}) => {
     }
     return (
         <>
+            <Box component={"h3"} textAlign={"center"}> points: {pointsPerRound}</Box>
             <Box component={"div"}
                  sx={{
                      display: "grid",
