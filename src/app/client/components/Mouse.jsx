@@ -1,10 +1,13 @@
 import {Box, TextField} from "@mui/material";
 import {daDK} from "@mui/material/locale";
+import {useContext} from "react";
+import AppConfigContext from "@/app/app-config-context";
 
 //    { id: 1, manufacturer: "Logitech", model: "M185", price: 49.9, color: "Black", isWireless: true },
 const Mouse = (props2) => {
 
 
+    const appConfigCtx = useContext(AppConfigContext);
     console.log("mouse = ", props2)
     return (
         <div>
@@ -22,6 +25,7 @@ const Mouse = (props2) => {
                 <span>Price: {props2.data?.price}</span>
 
 
+                <span>{appConfigCtx.darkMode? "Dark ": "Light "} Mode</span>
             </Box>
             <form  noValidate autoComplete="off">
                 <Box component={"div"} sx={{

@@ -20,6 +20,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import Link from 'next/link'
 import {useState} from "react";
+import AppConfigContext from "@/app/app-config-context";
 
 const roboto = Roboto({
     weight: ['300', '400', '500', '700'],
@@ -34,86 +35,91 @@ export default function RootLayout({children}) {
     return (
         <html lang="en" className={roboto.className}>
         <body>
-        <AppRouterCacheProvider>
-            <ThemeProvider theme={GlobalTheme}>
-                <p>Here can come the layout of all website... <b>This will be shown in all pages of the app.</b></p>
-                <Box sx={{flexGrow: 1}}>
-                    <AppBar position="static">
 
-                        <Container maxWidth="xl">
-
-                            <Toolbar disableGutters>
-                                <IconButton
-                                    size="large"
-                                    edge="start"
-                                    color="inherit"
-                                    aria-label="menu"
-                                    sx={{mr: 2}}
-                                    component = {Link}
-                                    href ="/"
-                                >
-                                    <HomeIcon/>
-                                </IconButton>
+        <AppConfigContext value={{darkMode: darkMode}}>
 
 
-                                <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}
+            <AppRouterCacheProvider>
+                <ThemeProvider theme={GlobalTheme}>
+                    <p>Here can come the layout of all website... <b>This will be shown in all pages of the app.</b></p>
+                    <Box sx={{flexGrow: 1}}>
+                        <AppBar position="static">
 
-                                >
+                            <Container maxWidth="xl">
 
-
-                                    <Button sx={{my: 2, color: 'white', display: 'block'}}
-                                            component={Link}
-                                            href="/pages/docs"
+                                <Toolbar disableGutters>
+                                    <IconButton
+                                        size="large"
+                                        edge="start"
+                                        color="inherit"
+                                        aria-label="menu"
+                                        sx={{mr: 2}}
+                                        component={Link}
+                                        href="/"
                                     >
-                                        Docs
+                                        <HomeIcon/>
+                                    </IconButton>
 
 
-                                    </Button>
-                                    <Button sx={{my: 2, color: 'white', display: 'block'}}
-                                            component={Link}
-                                            href="/pages/memory-game">
-                                        Memory Game
+                                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}
 
-                                    </Button>
-
-                                    <Button sx={{my: 2, color: 'white', display: 'block'}}
-                                            component={Link}
-                                            href="/pages/draft">
-                                        Draft
-                                    </Button>
+                                    >
 
 
-                                    {/*{pages.map((page) => (*/}
-                                    {/*    <Button*/}
-                                    {/*        key={page}*/}
-                                    {/*        onClick={handleCloseNavMenu}*/}
-                                    {/*        sx={{ my: 2, color: 'white', display: 'block' }}*/}
-                                    {/*    >*/}
-                                    {/*        {page}*/}
-                                    {/*    </Button>*/}
-                                    {/*))}*/}
-                                </Box>
-                                <FormGroup>
-                                    <FormControlLabel control={<Switch checked={darkMode}  color={"secondary"}
-                                    onChange={()=>setDarkMode(!darkMode)}
-                                    />} label="Dark Mode" />
-                                </FormGroup>
-                                <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                    News
-                                </Typography>
-                            </Toolbar>
-                        </Container>
-                    </AppBar>
-                </Box>
+                                        <Button sx={{my: 2, color: 'white', display: 'block'}}
+                                                component={Link}
+                                                href="/pages/docs"
+                                        >
+                                            Docs
 
 
-                {children}
+                                        </Button>
+                                        <Button sx={{my: 2, color: 'white', display: 'block'}}
+                                                component={Link}
+                                                href="/pages/memory-game">
+                                            Memory Game
 
-                <p>Here will come the footer of the whole app. </p>
+                                        </Button>
 
-            </ThemeProvider>
+                                        <Button sx={{my: 2, color: 'white', display: 'block'}}
+                                                component={Link}
+                                                href="/pages/draft">
+                                            Draft
+                                        </Button>
 
-        </AppRouterCacheProvider>
+
+                                        {/*{pages.map((page) => (*/}
+                                        {/*    <Button*/}
+                                        {/*        key={page}*/}
+                                        {/*        onClick={handleCloseNavMenu}*/}
+                                        {/*        sx={{ my: 2, color: 'white', display: 'block' }}*/}
+                                        {/*    >*/}
+                                        {/*        {page}*/}
+                                        {/*    </Button>*/}
+                                        {/*))}*/}
+                                    </Box>
+                                    <FormGroup>
+                                        <FormControlLabel control={<Switch checked={darkMode} color={"secondary"}
+                                                                           onChange={() => setDarkMode(!darkMode)}
+                                        />} label="Dark Mode"/>
+                                    </FormGroup>
+                                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                                        News
+                                    </Typography>
+                                </Toolbar>
+                            </Container>
+                        </AppBar>
+                    </Box>
+
+
+                    {children}
+
+                    <p>Here will come the footer of the whole app. </p>
+
+                </ThemeProvider>
+
+            </AppRouterCacheProvider>
+        </AppConfigContext>
         </body>
         </html>
     );
