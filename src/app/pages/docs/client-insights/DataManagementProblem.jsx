@@ -105,9 +105,9 @@ const Child = () => {
         <Box component={"div"}>
             <p>I am the son of the parent.</p>
 
-            <p>I want to get the value from my parent, but <b>I know how. I use context</b></p>
+            <p>I want to get the value from my parent, and <b>I know how. I use context</b></p>
 
-            <p>the value of my parent is: {parentValue}</p>
+            <p><u>the value of my parent is: {parentValue}</u></p>
         </Box>
     )
 
