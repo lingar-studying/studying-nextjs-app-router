@@ -2,6 +2,7 @@
 import {useState} from "react";
 import {Box, Button, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import Mouse from "@/app/client/components/Mouse";
+import DataManagementProblem from "@/app/pages/docs/client-insights/DataManagementProblem";
 
 const mouseMockData = [
     { id: 1, manufacturer: "Logitech", model: "M185", price: 49.9, color: "Black", isWireless: true },
@@ -44,7 +45,14 @@ const Page = () => {
 
 
                 <h2>Client Insights</h2>
+                <p>We go from new to the old. </p>
+                <h3>Solve this:</h3>
+                <DataManagementProblem/>
 
+
+
+
+                <hr/>
                 <h3>Simple component: </h3>
                 <Mouse data = {mouseMockData[0]}/>
 
