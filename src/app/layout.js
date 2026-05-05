@@ -3,11 +3,23 @@
 import "./globals.css";
 import {AppRouterCacheProvider} from '@mui/material-nextjs/v16-appRouter';
 import GlobalTheme from "@/app/global-theme";
-import {AppBar, Box, Button, Container, IconButton, ThemeProvider, Toolbar, Typography, Menu} from "@mui/material";
+import {
+    AppBar,
+    Box,
+    Button,
+    Container,
+    IconButton,
+    ThemeProvider,
+    Toolbar,
+    Typography,
+    Menu,
+    Switch, FormControlLabel, FormGroup
+} from "@mui/material";
 import {Roboto} from "next/font/google";
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import Link from 'next/link'
+import {useState} from "react";
 
 const roboto = Roboto({
     weight: ['300', '400', '500', '700'],
@@ -18,6 +30,7 @@ const roboto = Roboto({
 
 
 export default function RootLayout({children}) {
+    const [darkMode, setDarkMode] = useState(false);
     return (
         <html lang="en" className={roboto.className}>
         <body>
@@ -80,6 +93,11 @@ export default function RootLayout({children}) {
                                     {/*    </Button>*/}
                                     {/*))}*/}
                                 </Box>
+                                <FormGroup>
+                                    <FormControlLabel control={<Switch checked={darkMode}  color={"secondary"}
+                                    onChange={()=>setDarkMode(!darkMode)}
+                                    />} label="Dark Mode" />
+                                </FormGroup>
                                 <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                                     News
                                 </Typography>
