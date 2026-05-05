@@ -15,6 +15,25 @@ const DataManagementProblem =()=>{
 
             </ol>
 
+            <Box component={"div"}
+            sx = {{
+                display: "flex",
+                flexWrap: "wrap",
+                padding: 3,
+                justifyContent: "space-around",
+                border: "2px solid purple",
+                gap: 2
+
+            }}
+
+            >
+                {VALUES.map(item=> <Parent value={ item}/>)
+
+                }
+
+
+            </Box>
+
 
         </Box>
     )
@@ -28,10 +47,11 @@ export default DataManagementProblem;
 const Parent = (props)=>{
 
     return(
-        <Box component={"div"} sx ={{border: "2px solid black", width: squareSize, height: squareSize}}>
+        <Box component={"div"} sx ={{border: "2px solid black",    width: '250px',
+            aspectRatio: '1 / 1', padding: 3}}>
 
-            <h2>I am Parent Component, MY VALUE IS : {props.value}</h2>
-            <h3>I have here MEDIUM component that must not have props available</h3>
+            <p>I am Parent Component, <br/>MY VALUE IS : <b>{props.value}</b></p>
+            <p>I have here MEDIUM component that must not have props available</p>
 
 
         </Box>
