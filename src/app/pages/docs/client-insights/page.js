@@ -24,7 +24,11 @@ const Page = () => {
     const [selectedMouse, setSelectedMouse] = useState(mouseMockData[2]);
 
     const [singleMouse, setSingleMouse] = useState({
-        id: 19, manufacturer: "Corsair", model: "Harpoon ssssss", price: 149.9, color: "Brown", isWireless: true 
+        id: 19, manufacturer: "Corsair", model: "Harpoon ssssss", price: 149.9, color: "Brown", isWireless: true,
+        owner: {
+            name: "KPS", 
+            address: "Netanya Hagiborim"
+        }
     });
     
 
@@ -50,11 +54,17 @@ const Page = () => {
 
         //singleMouse[ev.target.name] = ev.target.value;
 
-        const copy = singleMouse;
-        // copy[]
-        setSingleMouse({
-            [ev.target.name] :ev.target.value
-        })
+        // const copy = {...singleMouse};
+
+        // copy[ev.target.name] = ev.target.value;
+       
+        // setSingleMouse(copy)
+
+        setSingleMouse(
+            (prevState=>{
+                return {...prevState, [ev.target.name] :ev.target.value, owner: {address: "Holon"}}
+            })
+        );
 
     }
 

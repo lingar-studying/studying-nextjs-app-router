@@ -47,6 +47,9 @@ const Mouse = (props2) => {
 
                                label="Price" onChange={(ev) => props2.onChange(ev, props2.data.id)}/>
 
+                               {props2?.data?.owner && 
+                               <p>Name = {props2?.data?.owner?.name} Address = {props2?.data?.owner.address} </p>}
+
                 </Box>
             </form>
 
