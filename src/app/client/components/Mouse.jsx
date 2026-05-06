@@ -1,13 +1,19 @@
 import {Box, TextField} from "@mui/material";
 import {daDK} from "@mui/material/locale";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import AppConfigContext from "@/app/app-config-context";
 
 //    { id: 1, manufacturer: "Logitech", model: "M185", price: 49.9, color: "Black", isWireless: true },
 const Mouse = (props2) => {
 
-
+    const [total, setTotal] = useState(0);
     const appConfigCtx = useContext(AppConfigContext);
+
+
+    useEffect(()=>{
+
+        setTotal(Number((props2?.data?.price * 1.18).toFixed(2)));
+    },[props2?.data?.price])
     console.log("mouse = ", props2)
     return (
         <div>
@@ -50,6 +56,8 @@ const Mouse = (props2) => {
 
 
                                label="Price" onChange={(ev) => props2.onChange(ev, props2.data.id)}/>
+
+                    <h4>Total = {total}</h4>
 
                 </Box>
             </form>
