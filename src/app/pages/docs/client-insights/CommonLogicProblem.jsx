@@ -1,6 +1,7 @@
-import {Box} from "@mui/material";
-import {createContext, useContext, useState} from "react";
+import {Box, TextField} from "@mui/material";
+import {createContext, useContext, useEffect, useState} from "react";
 import Mouse from "@/app/client/components/Mouse";
+import AppConfigContext from "@/app/app-config-context";
 
 
 const CommonLogicProblem = () => {
@@ -43,6 +44,10 @@ const CommonLogicProblem = () => {
 
                 <Mouse data={mouseData} onChange = {onChangeMouse}/>
 
+                <Furniture data ={{id: 3, manufacturer: "IKEA", model: "Desk", price: 429.23, color: "white"}}/>
+
+                <Commodity data ={{id: 3, manufacturer: "Elite", model: "Pesek Zeman", price: 6.5, color: "white"}}/>
+
 
             </Box>
 
@@ -55,3 +60,129 @@ const CommonLogicProblem = () => {
 export default CommonLogicProblem;
 
 //inner component
+const Furniture = (props2) => {
+
+    const [total, setTotal] = useState(0);
+
+    const [data, setData] = useState(props2.data);
+
+    const onChange = (ev)=>{
+        setData((prev)=>({...prev, [ev.target.name]: ev.target.value}));
+    }
+
+    return (
+        <div>
+            <h3>Furniture</h3>
+            <Box component={"div"} sx={{
+                display: "flex", justifyContent: "space-between",
+                width: "500px", flexWrap: "wrap", border: "2px solid yellow",
+                backgroundColor: "brown",
+                color: "white"
+            }} p={2}>
+
+
+                <span>Manufacturer: {data?.manufacturer}</span>
+
+                <span>Model: {data?.model}</span>
+
+                <span>Price: {data?.price}</span>
+
+
+            </Box>
+            <form  noValidate autoComplete="off">
+                <Box component={"div"} sx={{
+                    display: "flex", justifyContent: "space-between",
+                    width: "500px", flexWrap: "wrap", border: "2px solid blue", gap: 2
+                }} p={2}>
+
+                    <TextField variant={"outlined"}
+                               name = "manufacturer"
+                               value={data?.manufacturer}
+                               label={"Manufacturer"} onChange={onChange}/>
+
+                    <TextField variant={"outlined"}
+                               value={data?.model}
+                               name = "model"
+
+                               label="Model" onChange={onChange}/>
+
+                    <TextField variant={"outlined"}
+                               value={data?.price}
+                               name = "price"
+
+
+                               label="Price" onChange={onChange}/>
+
+                    <h4>Total = {total}</h4>
+
+                </Box>
+            </form>
+
+
+        </div>
+    )
+}
+
+
+const Commodity = (props2) => {
+
+    const [total, setTotal] = useState(0);
+
+    const [data, setData] = useState(props2.data);
+
+    const onChange = (ev)=>{
+        setData((prev)=>({...prev, [ev.target.name]: ev.target.value}));
+    }
+
+    return (
+        <div>
+            <h3>Commodity</h3>
+            <Box component={"div"} sx={{
+                display: "flex", justifyContent: "space-between",
+                width: "500px", flexWrap: "wrap", border: "2px solid yellow",
+                backgroundColor: "green",
+                color: "white"
+            }} p={2}>
+
+
+                <span>Manufacturer: {data?.manufacturer}</span>
+
+                <span>Model: {data?.model}</span>
+
+                <span>Price: {data?.price}</span>
+
+
+            </Box>
+            <form  noValidate autoComplete="off">
+                <Box component={"div"} sx={{
+                    display: "flex", justifyContent: "space-between",
+                    width: "500px", flexWrap: "wrap", border: "2px solid blue", gap: 2
+                }} p={2}>
+
+                    <TextField variant={"outlined"}
+                               name = "manufacturer"
+                               value={data?.manufacturer}
+                               label={"Manufacturer"} onChange={onChange}/>
+
+                    <TextField variant={"outlined"}
+                               value={data?.model}
+                               name = "model"
+
+                               label="Model" onChange={onChange}/>
+
+                    <TextField variant={"outlined"}
+                               value={data?.price}
+                               name = "price"
+
+
+                               label="Price" onChange={onChange}/>
+
+                    <h4>Total = {total}</h4>
+
+                </Box>
+            </form>
+
+
+        </div>
+    )
+}
