@@ -24,6 +24,10 @@ const CommonLogicProblem = () => {
                 <li>We want this behavior in product 2, and 3 too. but without duplicate the useEffect and keep good practice of
                 keeping the common behavior at one place. How can we do it?
                 </li>
+                <li>This is only use case example for different products/components</li>
+                <li>You can change the logic of mouse, create another file. </li>
+                <li>But you <b>MUST</b> not duplicate the useEffect that does it, and get the total in one row maximum. </li>
+                <li><b>Make it happen.</b></li>
 
             </ol>
 
