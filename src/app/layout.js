@@ -69,6 +69,12 @@ export default function RootLayout({children}) {
                                         Draft
                                     </Button>
 
+                                    <Button sx={{my: 2, color: 'white', display: 'block'}}
+                                            component={Link}
+                                            href="/pages/ai-stuff">
+                                        AI-Stuff
+                                    </Button>
+
 
                                     {/*{pages.map((page) => (*/}
                                     {/*    <Button*/}
