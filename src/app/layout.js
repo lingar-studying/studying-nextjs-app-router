@@ -34,7 +34,8 @@ export default function RootLayout({children}) {
     const [darkMode, setDarkMode] = useState(false);
     return (
         <html lang="en" className={roboto.className}>
-        <body>
+        <body suppressHydrationWarning={true}>
+
 
         <AppConfigContext value={{darkMode: darkMode}}>
 
