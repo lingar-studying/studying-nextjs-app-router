@@ -65,6 +65,12 @@ export default function RootLayout({children}) {
 
                                     >
 
+                                    <Button sx={{my: 2, color: 'white', display: 'block'}}
+                                            component={Link}
+                                            href="/pages/ai-stuff">
+                                        AI-Stuff
+                                    </Button>
+
 
                                         <Button sx={{my: 2, color: 'white', display: 'block'}}
                                                 component={Link}

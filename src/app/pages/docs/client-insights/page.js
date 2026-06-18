@@ -8,13 +8,14 @@ const mouseMockData = [
     { id: 1, manufacturer: "Logitech", model: "M185", price: 49.9, color: "Black", isWireless: true },
     { id: 2, manufacturer: "Razer", model: "DeathAdder Essential", price: 129.9, color: "Green", isWireless: false },
     { id: 3, manufacturer: "HP", model: "X500", price: 59.9, color: "Gray", isWireless: false },
+    { id: 10, manufacturer: "SteelSeries", model: "Rival 3", price: 159.9, color: "Black", isWireless: false },
+
+    { id: 7, manufacturer: "Asus", model: "WT425", price: 69.9, color: "Red", isWireless: true },
+    { id: 8, manufacturer: "A4Tech", model: "OP-620D", price: 34.9, color: "Black", isWireless: false },
     { id: 4, manufacturer: "Dell", model: "MS116", price: 39.9, color: "Black", isWireless: false },
     { id: 5, manufacturer: "Microsoft", model: "Bluetooth Mouse", price: 89.9, color: "Blue", isWireless: true },
     { id: 6, manufacturer: "Lenovo", model: "300 Wireless Compact", price: 74.9, color: "White", isWireless: true },
-    { id: 7, manufacturer: "Asus", model: "WT425", price: 69.9, color: "Red", isWireless: true },
-    { id: 8, manufacturer: "A4Tech", model: "OP-620D", price: 34.9, color: "Black", isWireless: false },
     { id: 9, manufacturer: "Corsair", model: "Harpoon RGB", price: 179.9, color: "Black", isWireless: false },
-    { id: 10, manufacturer: "SteelSeries", model: "Rival 3", price: 159.9, color: "Black", isWireless: false }
 ];
 
 const Page = () => {
@@ -22,6 +23,11 @@ const Page = () => {
 
     const [mouseMockState, setMouseMockState] = useState(mouseMockData);
     const [selectedMouse, setSelectedMouse] = useState(mouseMockData[2]);
+
+    const [singleMouse, setSingleMouse] = useState({
+        id: 19, manufacturer: "Corsair", model: "Harpoon ssssss", price: 149.9, color: "Brown", isWireless: true 
+    });
+    
 
     const onChangeMouse = (ev, id)=>{
 
@@ -39,6 +45,21 @@ const Page = () => {
 
         setMouseMockState(temp);
     }
+   
+    const onChangeSingleMouse = (ev) =>{
+        console.log("change single",  ev.target.value)
+
+        //singleMouse[ev.target.name] = ev.target.value;
+
+        const copy = singleMouse;
+        // copy[]
+        setSingleMouse({
+            [ev.target.name] :ev.target.value
+        })
+
+    }
+
+    
     return (
         <>
             <Box component={"div"} p={"40px"}>
@@ -74,6 +95,10 @@ const Page = () => {
                         onClick = {()=>setSelectedMouse(mouseMockData[2])}
 
                 >Mouse 3 </Button>
+
+
+                <p>Singe mouse = {`model = ${singleMouse.model}, ${singleMouse.manufacturer}, ${singleMouse.price} `}</p>
+                <Mouse data = {singleMouse} onChange = {onChangeSingleMouse}/>
 
                 <Table width={"700px !important"}>
 

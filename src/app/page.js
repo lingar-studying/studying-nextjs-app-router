@@ -30,12 +30,14 @@ export default function Home() {
                 <h3>Those are links with a html tag</h3>
 
                 <p><a href={"/pages/draft"} target="_blank">Draft</a> |
+                    <a href={"/pages/ai-stuff"} target="_blank">AI-Stuff</a> |
                     <a href={"/pages/memory-game"} target="_blank"> Memory Game
                     </a>
                 </p>
 
                 <h3>And those are with the "Link" predefined component of next</h3>
                 <Link href={"/pages/draft"} target="_blank">Draft</Link> |
+                <Link href={"/pages/ai-stuff"} target="_blank">AI-Stuff</Link> |
                 <Link href={"/pages/memory-game"} target="_blank"> Memory Game
                 </Link>
  |

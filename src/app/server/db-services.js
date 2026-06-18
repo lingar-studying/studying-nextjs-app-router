@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const DATABASE_NAME = "NEXTJS_APP_ROUTER";
-// const MONGO_URI = "mongodb://lingar:12345678@localhost:27017/" + DATABASE_NAME + "?authSource=admin";
-const MONGO_URI = "mongodb://localhost:27017/studying-next-app-router"
+const MONGO_URI = "mongodb://lingar:12345678@localhost:27017/" + DATABASE_NAME + "?authSource=admin";
+// const MONGO_URI = "mongodb://localhost:27017/studying-next-app-router"
 let cached = global.mongoose || {conn: null, promise: null};
 
 let isConnected = false;
