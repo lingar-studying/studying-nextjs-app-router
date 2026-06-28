@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import "./models/User"; // Explicitly register User model
+import  {RecordModel} from "@/app/server/models/many-schemes";
+
 
 const DATABASE_NAME = "NEXTJS_APP_ROUTER";
 const MONGO_URI = "mongodb://lingar:12345678@localhost:27017/" + DATABASE_NAME + "?authSource=admin";
