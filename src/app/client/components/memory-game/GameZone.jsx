@@ -1,7 +1,7 @@
 import React from "react";
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import {Box} from "@mui/material";
-import Round from "@/app/pages/memory-game/Round";
+import Round from "@/app/client/components/memory-game/Round";
 
 
 /**
@@ -18,7 +18,7 @@ const initialUserMock = {
 
 }
 
-const Game = (props) => {
+const GameZone = (props) => {
 
 
     return (
@@ -32,4 +32,4 @@ const Game = (props) => {
 }
 
 
-export default Game;
+export default GameZone;

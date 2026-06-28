@@ -1,8 +1,8 @@
 'use client'
 import React, {useState} from 'react';
 import {Box} from "@mui/material";
-import {iconsStore, PPR} from "@/app/pages/memory-game/constant-memory-game";
-import useCardList from "@/app/pages/memory-game/use-card-list";
+import {iconsStore, PPR} from "@/app/client/components/memory-game/constant-memory-game";
+import useCardList from "@/app/client/components/memory-game/use-card-list";
 
 const Round = ({gridLength, cardLength}) => {
 

@@ -1,4 +1,4 @@
-import Game from "@/app/pages/memory-game/Game";
+import GameZone from "@/app/client/components/memory-game/GameZone";
 import {Box} from "@mui/material";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
 
             <h2>Game Zone</h2>
 
-            <Game/>
+            <GameZone/>
 
         </Box>
 
