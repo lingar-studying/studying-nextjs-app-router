@@ -8,10 +8,7 @@ export default function Home() {
         <Box component={"div"} className={"styles.page"}
              sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}
         >
-
-            <h1>Here will come memory game</h1>
-
-            <Box component={"div"} sx = {{width: 1}} p ={"200px"}>
+            <Box component={"div"} sx={{width: 1}} >
                 <MainPageGame/>
             </Box>
 

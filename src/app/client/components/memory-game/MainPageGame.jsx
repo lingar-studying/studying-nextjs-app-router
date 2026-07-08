@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import {Box} from "@mui/material";
 import PropTypes from "prop-types";
 import GameZone from "@/app/client/components/memory-game/GameZone";
-
+import "./MainPageGame.css";
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -27,30 +27,51 @@ CustomTabPanel.propTypes = {
     value: PropTypes.number.isRequired,
 };
 const MainPageGame = (props)=>{
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(1);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
     return (
-        <Box sx={{ width: '90%' }} pl ={10}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Draft"  />
-                    <Tab label="Highlights"  />
-                    <Tab label="Game Zone"  />
-                </Tabs>
+        <Box className="game-page">
+            <Box className="game-container">
+                <Box className="game-header">
+                    <h1>🏆 Memory Challenge</h1>
+                    <p>Train your memory. Match the cards and beat your best score!</p>
+                </Box>
+                <Box className="game-tabs">
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        aria-label="game tabs"
+                        TabIndicatorProps={{
+                            className: "tab-indicator"
+                        }}
+                    >
+                        <Tab className="game-tab" label="Draft" />
+                        <Tab className="game-tab" label="Highlights" />
+                        <Tab className="game-tab" label="Game Zone" />
+                    </Tabs>
+                </Box>
+
+                <CustomTabPanel value={value} index={0}>
+                    <GameZone/>
+                </CustomTabPanel>
+
+                <CustomTabPanel value={value} index={1}>
+                    <div className="placeholder">
+                        Highlights
+                    </div>
+                </CustomTabPanel>
+
+                <CustomTabPanel value={value} index={2}>
+                    <div className="placeholder">
+                        Game Zone
+                    </div>
+                </CustomTabPanel>
+
             </Box>
-            <CustomTabPanel value={value} index={0}>
-                <GameZone/>
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-                Highlights
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={2}>
-                Game Zone
-            </CustomTabPanel>
         </Box>
     );
 }
