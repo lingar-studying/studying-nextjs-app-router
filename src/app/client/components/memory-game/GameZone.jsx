@@ -23,10 +23,7 @@ const GameZone = (props) => {
 
     return (
         <Box component={"div"}>
-            <h2>Game</h2>
-            <AlignHorizontalLeftIcon/>
-
-            <Round  cardLength = {200} gridLength={5}/>
+            <Round cardLength={200} gridLength={5}/>
         </Box>
     )
 }
