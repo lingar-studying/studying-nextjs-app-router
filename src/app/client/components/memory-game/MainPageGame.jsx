@@ -8,8 +8,10 @@ import "./MainPageGame.css";
 import Records from "@/app/client/components/memory-game/Records";
 import useGetUser from "@/app/client/client-services/use-get-user";
 import Link from 'next/link'
+import GlobalContext from "@/app/client/client-services/global-context";
+
 function CustomTabPanel(props) {
-    const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
     return (
         <div
@@ -19,7 +21,7 @@ function CustomTabPanel(props) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+            {value === index && <Box sx={{p: 3}}>{children}</Box>}
         </div>
     );
 }
@@ -29,7 +31,7 @@ CustomTabPanel.propTypes = {
     index: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
 };
-const MainPageGame = (props)=>{
+const MainPageGame = (props) => {
     const [value, setValue] = React.useState(1);
     const {user, loading} = useGetUser();
 
@@ -43,53 +45,55 @@ const MainPageGame = (props)=>{
                 <Box className="game-header">
                     <h1>🏆 Memory Challenge</h1>
                     <p>Train your memory. Match the cards and beat your best score!</p>
-                    <div> {user? `Hello ${user.name}` : (<div>
+                    <div> {user ? `Hello ${user.name}` : (<div>
                         <Button variant={"contained"}><Link href="/pages/ai-stuff"> Login</Link></Button>
-                    OR play as a guest
+                        OR play as a guest
                     </div>)}</div>
                 </Box>
-                <Box className="game-tabs">
-                    <Tabs
-                        value={value}
-                        onChange={handleChange}
-                        aria-label="game tabs"
-                        TabIndicatorProps={{
-                            className: "tab-indicator"
-                        }}
-                    >
-                        <Tab className="game-tab" label="Highlights" />
-                        <Tab className="game-tab" label="Game Zone" />
-                        <Tab className="game-tab" label="Draft" />
 
-                    </Tabs>
-                </Box>
+                <GlobalContext.Provider value={{loggedUser: user}}>
+                    <Box className="game-tabs">
+                        <Tabs
+                            value={value}
+                            onChange={handleChange}
+                            aria-label="game tabs"
+                            TabIndicatorProps={{
+                                className: "tab-indicator"
+                            }}
+                        >
+                            <Tab className="game-tab" label="Highlights"/>
+                            <Tab className="game-tab" label="Game Zone"/>
+                            <Tab className="game-tab" label="Draft"/>
 
-
-
-                <CustomTabPanel value={value} index={0}>
-                    <div className="placeholder" >
-                        <div sx ={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
-
-                            Highlights
+                        </Tabs>
+                    </Box>
 
 
-                            <Records/>
+                    <CustomTabPanel value={value} index={0}>
+                        <div className="placeholder">
+                            <div sx={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+
+                                Highlights
+
+
+                                <Records/>
+
+                            </div>
 
                         </div>
+                    </CustomTabPanel>
 
-                    </div>
-                </CustomTabPanel>
-
-                <CustomTabPanel value={value} index={1}>
+                    <CustomTabPanel value={value} index={1}>
 
                         <GameZone/>
 
-                </CustomTabPanel>
-                <CustomTabPanel value={value} index={2}>
-                    <h1>Draft area </h1>
-                </CustomTabPanel>
-
+                    </CustomTabPanel>
+                    <CustomTabPanel value={value} index={2}>
+                        <h1>Draft area </h1>
+                    </CustomTabPanel>
+                </GlobalContext.Provider>
             </Box>
+
         </Box>
     );
 }

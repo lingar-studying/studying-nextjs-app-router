@@ -1,9 +1,10 @@
 'use client'
 
-import React, {use, useState} from "react";
+import React, {use, useContext, useState} from "react";
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import {Box} from "@mui/material";
 import Round from "@/app/client/components/memory-game/Round";
+import GlobalContext from "@/app/client/client-services/global-context";
 
 /**
  * The flow of the game - mock
@@ -31,10 +32,13 @@ const GameZone = (props) => {
     const firstChosenCard = useState(null);
     const secondChosenCard = useState(null);
     const roundNumber = useState(1);
+    const {loggedUser} = useContext(GlobalContext);
 
 
     return (
         <Box component={"div"}>
+            <p> {loggedUser && `user logged ${loggedUser.name}`}</p>
+
             <Round cardLength={200} gridLength={5}/>
         </Box>
     )
