@@ -49,26 +49,28 @@ const MainPageGame = (props)=>{
                             className: "tab-indicator"
                         }}
                     >
-                        <Tab className="game-tab" label="Draft" />
                         <Tab className="game-tab" label="Highlights" />
                         <Tab className="game-tab" label="Game Zone" />
+                        <Tab className="game-tab" label="Draft" />
+
                     </Tabs>
                 </Box>
 
-                <CustomTabPanel value={value} index={0}>
-                    <GameZone/>
-                </CustomTabPanel>
 
-                <CustomTabPanel value={value} index={1}>
+
+                <CustomTabPanel value={value} index={0}>
                     <div className="placeholder">
                         Highlights
                     </div>
                 </CustomTabPanel>
 
+                <CustomTabPanel value={value} index={1}>
+
+                        <GameZone/>
+
+                </CustomTabPanel>
                 <CustomTabPanel value={value} index={2}>
-                    <div className="placeholder">
-                        Game Zone
-                    </div>
+                    <h1>Draft area </h1>
                 </CustomTabPanel>
 
             </Box>
