@@ -1,25 +1,18 @@
-import Game from "@/app/pages/memory-game/Game";
+"use client"
+import GameZone from "@/app/client/components/memory-game/GameZone";
 import {Box} from "@mui/material";
+import MainPageGame from "@/app/client/components/memory-game/MainPageGame";
 
 export default function Home() {
-  return (
-    <Box component={"div"} className={"styles.page"}
-    sx = {{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}
-    >
+    return (
+        <Box component={"div"} className={"styles.page"}
+             sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}
+        >
+            <Box component={"div"} sx={{width: 1}} >
+                <MainPageGame/>
+            </Box>
 
-      <h1>Here will come memory game</h1>
-
-        <Box component={"div"}>
-
-            <h2>Game Zone</h2>
-
-            <Game/>
 
         </Box>
-
-
-
-
-    </Box>
-  );
+    );
 }

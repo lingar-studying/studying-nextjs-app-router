@@ -3,7 +3,7 @@
 import React, {use, useState} from "react";
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import {Box} from "@mui/material";
-import Round from "@/app/pages/memory-game/Round";
+import Round from "@/app/client/components/memory-game/Round";
 
 /**
  * The flow of the game - mock
@@ -19,7 +19,7 @@ const initialUserMock = {
 
 }
 
-const Game = (props) => {
+const GameZone = (props) => {
 
     const user= initialUserMock;
     const guestName = useState(null);
@@ -35,13 +35,10 @@ const Game = (props) => {
 
     return (
         <Box component={"div"}>
-            <h2>Game</h2>
-            <AlignHorizontalLeftIcon/>
-
-            <Round  cardLength = {200} gridLength={5}/>
+            <Round cardLength={200} gridLength={5}/>
         </Box>
     )
 }
 
 
-export default Game;
+export default GameZone;

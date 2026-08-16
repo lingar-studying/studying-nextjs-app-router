@@ -1,5 +1,5 @@
 'use client'
-import {iconsStore} from "@/app/pages/memory-game/constant-memory-game";
+import {iconsStore} from "@/app/client/components/memory-game/constant-memory-game";
 import {useEffect, useState} from "react";
 
 const useCardList = (gridLength, decreasePoints) => {
