@@ -1,11 +1,13 @@
 import React from "react";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import {Box} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import PropTypes from "prop-types";
 import GameZone from "@/app/client/components/memory-game/GameZone";
 import "./MainPageGame.css";
 import Records from "@/app/client/components/memory-game/Records";
+import useGetUser from "@/app/client/client-services/use-get-user";
+import Link from 'next/link'
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -29,6 +31,7 @@ CustomTabPanel.propTypes = {
 };
 const MainPageGame = (props)=>{
     const [value, setValue] = React.useState(1);
+    const {user, loading} = useGetUser();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -40,6 +43,10 @@ const MainPageGame = (props)=>{
                 <Box className="game-header">
                     <h1>🏆 Memory Challenge</h1>
                     <p>Train your memory. Match the cards and beat your best score!</p>
+                    <div> {user? `Hello ${user.name}` : (<div>
+                        <Button variant={"contained"}><Link href="/pages/ai-stuff"> Login</Link></Button>
+                    OR play as a guest
+                    </div>)}</div>
                 </Box>
                 <Box className="game-tabs">
                     <Tabs

@@ -15,9 +15,10 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
+import { useRouter } from 'next/navigation';
 
 export default function AiStuff() {
-    const [tab, setTab] = useState(0);
+    const [tab, setTab] = useState(1);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
@@ -25,6 +26,7 @@ export default function AiStuff() {
 
     const [registerForm, setRegisterForm] = useState({name: "", email: "", password: ""});
     const [loginForm, setLoginForm] = useState({email: "", password: ""});
+    const router = useRouter();
 
     const fetchCurrentUser = async () => {
         try {
@@ -102,6 +104,9 @@ export default function AiStuff() {
             setUser(data.user);
             setMessage(`Welcome back, ${data.user.name}!`);
             setLoginForm({email: "", password: ""});
+            router.push('/pages/memory-game');
+
+
         } catch {
             setError("Login failed");
         }
