@@ -1,8 +1,9 @@
-import React from "react";
+'use client'
+
+import React, {use, useState} from "react";
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import {Box} from "@mui/material";
 import Round from "@/app/pages/memory-game/Round";
-
 
 /**
  * The flow of the game - mock
@@ -19,6 +20,17 @@ const initialUserMock = {
 }
 
 const Game = (props) => {
+
+    const user= initialUserMock;
+    const guestName = useState(null);
+    const timerN = useState(10);
+    const accumulatedScore = useState(0);
+    const roundScore = useState(20);
+    const gridSize = useState(2);
+    const cards = useState([]);
+    const firstChosenCard = useState(null);
+    const secondChosenCard = useState(null);
+    const roundNumber = useState(1);
 
 
     return (
