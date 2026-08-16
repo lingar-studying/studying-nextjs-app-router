@@ -5,6 +5,7 @@ import {Box} from "@mui/material";
 import PropTypes from "prop-types";
 import GameZone from "@/app/client/components/memory-game/GameZone";
 import "./MainPageGame.css";
+import Records from "@/app/client/components/memory-game/Records";
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -59,8 +60,16 @@ const MainPageGame = (props)=>{
 
 
                 <CustomTabPanel value={value} index={0}>
-                    <div className="placeholder">
-                        Highlights
+                    <div className="placeholder" >
+                        <div sx ={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+
+                            Highlights
+
+
+                            <Records/>
+
+                        </div>
+
                     </div>
                 </CustomTabPanel>
 
