@@ -2,7 +2,7 @@
 
 import React, {use, useContext, useState} from "react";
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
-import {Box} from "@mui/material";
+import {Box, TextField} from "@mui/material";
 import Round from "@/app/client/components/memory-game/Round";
 import GlobalContext from "@/app/client/client-services/global-context";
 
@@ -20,10 +20,8 @@ const initialUserMock = {
 
 }
 
-const GameZone = (props) => {
+const Game = (props) => {
 
-    const user= initialUserMock;
-    const guestName = useState(null);
     const timerN = useState(10);
     const accumulatedScore = useState(0);
     const roundScore = useState(20);
@@ -33,16 +31,30 @@ const GameZone = (props) => {
     const secondChosenCard = useState(null);
     const roundNumber = useState(1);
     const {loggedUser} = useContext(GlobalContext);
+    const guestName = useState(null);
 
 
     return (
         <Box component={"div"}>
             <p> {loggedUser && `user logged ${loggedUser.name}`}</p>
+            {!loggedUser &&
+            <>
+                <form>
+                    <TextField variant={"outlined"}  name = "guestName"
+                    placeholder={"Add Guest Name"}
+                               color={"white"}
+                    />
+                    <TextField type={"submit"} value = "Save Guest Name"
+                               sx=
+                                   {{'& .MuiInputBase-root': {backgroundColor: "primary.main"}}} />
 
+                </form>
+
+            </>}
             <Round cardLength={200} gridLength={5}/>
         </Box>
     )
 }
 
 
-export default GameZone;
+export default Game;

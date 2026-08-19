@@ -1,5 +1,5 @@
 "use client"
-import GameZone from "@/app/client/components/memory-game/GameZone";
+import Game from "@/app/client/components/memory-game/Game";
 import {Box} from "@mui/material";
 import MainPageGame from "@/app/client/components/memory-game/MainPageGame";
 

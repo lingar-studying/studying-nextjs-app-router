@@ -1,14 +1,15 @@
 import React from "react";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import {Box, Button} from "@mui/material";
+import {Box, Button, ThemeProvider} from "@mui/material";
 import PropTypes from "prop-types";
-import GameZone from "@/app/client/components/memory-game/GameZone";
+import Game from "@/app/client/components/memory-game/Game";
 import "./MainPageGame.css";
 import Records from "@/app/client/components/memory-game/Records";
 import useGetUser from "@/app/client/client-services/use-get-user";
 import Link from 'next/link'
 import GlobalContext from "@/app/client/client-services/global-context";
+import MemoryGameTheme from "@/app/client/components/memory-game/memory-game-theme";
 
 function CustomTabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -40,61 +41,63 @@ const MainPageGame = (props) => {
     };
 
     return (
-        <Box className="game-page">
-            <Box className="game-container">
-                <Box className="game-header">
-                    <h1>🏆 Memory Challenge</h1>
-                    <p>Train your memory. Match the cards and beat your best score!</p>
-                    <div> {user ? `Hello ${user.name}` : (<div>
-                        <Button variant={"contained"}><Link href="/pages/ai-stuff"> Login</Link></Button>
-                        OR play as a guest
-                    </div>)}</div>
-                </Box>
-
-                <GlobalContext.Provider value={{loggedUser: user}}>
-                    <Box className="game-tabs">
-                        <Tabs
-                            value={value}
-                            onChange={handleChange}
-                            aria-label="game tabs"
-                            TabIndicatorProps={{
-                                className: "tab-indicator"
-                            }}
-                        >
-                            <Tab className="game-tab" label="Highlights"/>
-                            <Tab className="game-tab" label="Game Zone"/>
-                            <Tab className="game-tab" label="Draft"/>
-
-                        </Tabs>
+        <ThemeProvider theme={MemoryGameTheme}>
+            <Box className="game-page">
+                <Box className="game-container">
+                    <Box className="game-header">
+                        <h1>🏆 Memory Challenge</h1>
+                        <p>Train your memory. Match the cards and beat your best score!</p>
+                        <div> {user ? `Hello ${user.name}` : (<div>
+                            <Button variant={"contained"}><Link href="/pages/ai-stuff"> Login</Link></Button>
+                            OR play as a guest
+                        </div>)}</div>
                     </Box>
 
+                    <GlobalContext.Provider value={{loggedUser: user}}>
+                        <Box className="game-tabs">
+                            <Tabs
+                                value={value}
+                                onChange={handleChange}
+                                aria-label="game tabs"
+                                TabIndicatorProps={{
+                                    className: "tab-indicator"
+                                }}
+                            >
+                                <Tab className="game-tab" label="Highlights"/>
+                                <Tab className="game-tab" label="Game Zone"/>
+                                <Tab className="game-tab" label="Draft"/>
 
-                    <CustomTabPanel value={value} index={0}>
-                        <div className="placeholder">
-                            <div sx={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
-
-                                Highlights
+                            </Tabs>
+                        </Box>
 
 
-                                <Records/>
+                        <CustomTabPanel value={value} index={0}>
+                            <div className="placeholder">
+                                <div sx={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+
+                                    Highlights
+
+
+                                    <Records/>
+
+                                </div>
 
                             </div>
+                        </CustomTabPanel>
 
-                        </div>
-                    </CustomTabPanel>
+                        <CustomTabPanel value={value} index={1}>
 
-                    <CustomTabPanel value={value} index={1}>
+                            <Game/>
 
-                        <GameZone/>
+                        </CustomTabPanel>
+                        <CustomTabPanel value={value} index={2}>
+                            <h1>Draft area </h1>
+                        </CustomTabPanel>
+                    </GlobalContext.Provider>
+                </Box>
 
-                    </CustomTabPanel>
-                    <CustomTabPanel value={value} index={2}>
-                        <h1>Draft area </h1>
-                    </CustomTabPanel>
-                </GlobalContext.Provider>
             </Box>
-
-        </Box>
+        </ThemeProvider>
     );
 }
 export default MainPageGame;
