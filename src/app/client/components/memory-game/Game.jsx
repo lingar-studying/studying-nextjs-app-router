@@ -37,39 +37,33 @@ const Game = (props) => {
 
 
     //FUNCTIONS
-    const handleGuestNameSave = (e) =>{
+    const handleGuestNameSave = (e) => {
         e.preventDefault();
-        console.log("e = " ,e)
-        // Pass the form DOM node to FormData
-        const data = new FormData(e.currentTarget);
-
-        // Convert all form values into a clean JavaScript object
-        const formValues = Object.fromEntries(data.entries());
         const guestName = e.currentTarget.elements?.guestName.value;
         setGuestName(guestName);
-        console.log("Submitted Form Data:", formValues);
+
     }
 
     return (
         <Box component={"div"}>
             <p> {loggedUser && `user logged ${loggedUser.name}`}</p>
-            {(!loggedUser && !guestName ) &&
-            <>
-                <Box component="form" onSubmit={handleGuestNameSave}  sx={{ '& > :not(style)': { m: 1 } }}
-                     noValidate
-                     autoComplete="off">
+            {(!loggedUser && !guestName) &&
+                <>
+                    <Box component="form" onSubmit={handleGuestNameSave} sx={{'& > :not(style)': {m: 1}}}
+                         noValidate
+                         autoComplete="off">
 
-                    <Input variant={"outlined"}  name = "guestName"
-                    placeholder={"Add Guest Name"}
+                        <Input variant={"outlined"} name="guestName"
+                               placeholder={"Add Guest Name"}
                                color={"white"}
                                defaultValue=""
-                    />
-                    <Input type={"submit"} value = "Save Guest Name"
-                              />
+                        />
+                        <Input type={"submit"} value="Save Guest Name"
+                        />
 
-                </Box>
+                    </Box>
 
-            </>}
+                </>}
             {guestName && <p>{guestName ?? ""} is playing</p>}
 
             <Round cardLength={200} gridLength={5}/>
