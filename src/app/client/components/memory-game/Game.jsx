@@ -1,11 +1,12 @@
 'use client'
 
-import React, {use, useContext, useState} from "react";
+import React, {use, useContext, useReducer, useState} from "react";
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
-import {Box, FormControl, TextField} from "@mui/material";
+import {Box, Button, FormControl, TextField} from "@mui/material";
 import Round from "@/app/client/components/memory-game/Round";
 import GlobalContext from "@/app/client/client-services/global-context";
 import Input from '@mui/material/Input';
+import {gameReducer} from "@/app/client/components/memory-game/memory-game-reducers";
 
 
 /**
@@ -35,6 +36,9 @@ const Game = (props) => {
     const {loggedUser} = useContext(GlobalContext);
     const [guestName, setGuestName] = useState(null);
 
+    //reducer
+    const [globalState, dispatch] = useReducer(gameReducer, {roundRunning: false});
+
 
     //FUNCTIONS
     const handleGuestNameSave = (e) => {
@@ -43,6 +47,8 @@ const Game = (props) => {
         setGuestName(guestName);
 
     }
+
+
 
     return (
         <Box component={"div"}>
@@ -66,7 +72,17 @@ const Game = (props) => {
                 </>}
             {guestName && <p>{guestName ?? ""} is playing</p>}
 
-            <Round cardLength={200} gridLength={5}/>
+
+
+            <p>round running? {globalState.roundRunning+""}</p>
+
+
+            {globalState?.roundRunning ?<Round cardLength={200} gridLength={5} gameDispatch = {dispatch}/>
+            :  <Button onClick={()=>dispatch({type: "START_GAME"})}>Ready To Start? </Button>
+            }
+
+
+
         </Box>
     )
 }
