@@ -78,7 +78,7 @@ const Game = (props) => {
 
 
             {globalState?.roundRunning ?<Round cardLength={200} gridLength={5} gameDispatch = {dispatch}/>
-            :  <Button onClick={()=>dispatch({type: "START_GAME"})}>Ready To Start? </Button>
+            :  <Button onClick={()=>dispatch({type: "START_NEXT_ROUND"})}>Ready To Start Round? </Button>
             }
 
 

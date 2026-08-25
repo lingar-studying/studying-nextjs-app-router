@@ -1,8 +1,9 @@
 'use client'
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useReducer, useRef, useState} from 'react';
 import {Box} from "@mui/material";
 import {iconsStore, PPR} from "@/app/client/components/memory-game/constant-memory-game";
 import useCardList from "@/app/client/components/memory-game/use-card-list";
+import {gameReducer, roundReducer} from "@/app/client/components/memory-game/memory-game-reducers";
 
 const Round = ({gridLength, cardLength, gameDispatch}) => {
 
@@ -19,6 +20,7 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
 
     const intervalRef = useRef(null);
 
+    const [globalState, dispatch] = useReducer(roundReducer, {roundRunning: false});
 
     useEffect(() => {
 
