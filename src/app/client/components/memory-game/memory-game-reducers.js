@@ -9,7 +9,9 @@ export const gameReducer = (state, action) => {
 
             return {
                 ...state,
-                roundRunning: true
+                roundRunning: true,
+                gridSize: state.gridSize+1
+
             };
         case "GAME_OVER": {
 
@@ -24,7 +26,6 @@ export const gameReducer = (state, action) => {
             return {
                 ...state,
                 roundRunning: false,
-                gridSize: state.gridSize+1
             }
         }
         case "FINISH_GAME": {

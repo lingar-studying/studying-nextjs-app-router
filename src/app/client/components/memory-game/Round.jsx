@@ -35,7 +35,7 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
 
     useEffect(()=>{
         if(seconds <=0 ){
-            gameDispatch({type: "ROUND_FINISHED"});
+            // gameDispatch({type: "ROUND_FINISHED"});
             clearInterval(intervalRef.current);
             return ;
         }
