@@ -28,7 +28,7 @@ const Game = (props) => {
     const timerN = useState(10);
     const accumulatedScore = useState(0);
     const roundScore = useState(20);
-    const gridSize = useState(2);
+    // const gridSize = useState(3);
     const cards = useState([]);
     const firstChosenCard = useState(null);
     const secondChosenCard = useState(null);
@@ -37,7 +37,11 @@ const Game = (props) => {
     const [guestName, setGuestName] = useState(null);
 
     //reducer
-    const [globalState, dispatch] = useReducer(gameReducer, {roundRunning: false});
+    const [globalState, dispatch] = useReducer(gameReducer, {
+        gameRunning: false,
+        roundRunning: false,
+        gridSize: 2
+    });
 
 
     //FUNCTIONS
@@ -47,6 +51,8 @@ const Game = (props) => {
         setGuestName(guestName);
 
     }
+
+    //EFFECTS
 
 
 
@@ -77,7 +83,7 @@ const Game = (props) => {
             <p>round running? {globalState.roundRunning+""}</p>
 
 
-            {globalState?.roundRunning ?<Round cardLength={200} gridLength={5} gameDispatch = {dispatch}/>
+            {globalState?.roundRunning ?<Round cardLength={200} gridLength={globalState?.gridSize} gameDispatch = {dispatch}/>
             :  <Button onClick={()=>dispatch({type: "START_NEXT_ROUND"})}>Ready To Start Round? </Button>
             }
 
