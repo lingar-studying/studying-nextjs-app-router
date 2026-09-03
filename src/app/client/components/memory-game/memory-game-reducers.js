@@ -71,7 +71,7 @@ export const roundReducer = (state, action) => {
 
             return {
                 ...state,
-                roundRunning: false
+                roundPoints: state.roundPoints-1
             }
         }
         default:

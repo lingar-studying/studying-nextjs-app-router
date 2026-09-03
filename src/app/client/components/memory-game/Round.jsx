@@ -14,17 +14,18 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
         setPointsPerRound(pointsPerRound - 1);
     }
     const [seconds, setSeconds] = useState(5);
-    const [globalState, dispatch] = useReducer(roundReducer, {roundRunning: true});
+    const [globalState, dispatch] = useReducer(roundReducer, {roundRunning: true,
+    roundPoints: PPR });
 
 
     const roundDispatcher = useMemo(() => ({
         successQueue: () => dispatch({type: "SUCCESS_CHOICE"}),
         failureQueue: () => dispatch({type: "FAILURE_CHOICE"})
 
-    }));
+    }),[]);
 
 
-    const {cardList, selectCard} = useCardList(gridLength, decreasePoints, roundDispatcher) || [];
+    const {cardList, selectCard} = useCardList(gridLength, roundDispatcher) || [];
 
     const intervalRef = useRef(null);
 
@@ -59,7 +60,7 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
     }
     return (
         <>
-            <Box component={"h3"} textAlign={"center"}> points: {pointsPerRound}</Box>
+            <Box component={"h3"} textAlign={"center"}> points: {pointsPerRound} | new Points: {globalState?.roundPoints}</Box>
             <Box component={"h4"} textAlign={"center"}> TIME: {seconds}</Box>
             <Box component={"div"} sx={{display: "flex", width: "100%", justifyContent: "center"}}>
                 <Box component={"div"}
