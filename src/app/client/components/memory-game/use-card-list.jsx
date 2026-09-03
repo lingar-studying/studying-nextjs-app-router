@@ -2,7 +2,7 @@
 import {iconsStore} from "@/app/client/components/memory-game/constant-memory-game";
 import {useEffect, useState} from "react";
 
-const useCardList = (gridLength, decreasePoints) => {
+const useCardList = (gridLength, decreasePoints, clientDispatcher) => {
 
     //my lovely states:
     const [cardList, setCardList] = useState([]);
@@ -71,6 +71,8 @@ const useCardList = (gridLength, decreasePoints) => {
             setSelectedCard(card)
         } else {
             if (selectedCard.iconIndex !== card.iconIndex) {
+                clientDispatcher?.failureQueue();
+
                 decreasePoints();
                 const snd2 = new Audio("data:audio/wav;base64,UklGRlQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YTAAAAAAAP8A/wAAAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8A");
                 snd2.play();
@@ -85,8 +87,9 @@ const useCardList = (gridLength, decreasePoints) => {
 
                     setSelectedCard(null);
                 }, 1000);
-            }else{
+            }else{//success case
                 setSelectedCard(null);
+                clientDispatcher?.successQueue();
                 const snd3 = new Audio("data:audio/wav;base64,UklGRlAAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YTAAAAAAAP8AAP8A/wD/AP8A/wD/AP8A/////wAAAP8A/wD/AP8A");
                 snd3.play();
 

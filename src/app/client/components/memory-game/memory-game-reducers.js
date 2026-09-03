@@ -53,15 +53,22 @@ export const roundReducer = (state, action) => {
 
         }
         case "SUCCESS_ROUND": {
+            console.log("success round");
+            return ;
 
         }
         case "FAILURE_ROUND": {
-
+            console.log("failure round");
+            return ;
         }
         case "SUCCESS_CHOICE": {
-
+            console.log("success CHOICE");
+            return ;
         }
         case "FAILURE_CHOICE": {
+
+            console.log("failure CHOICE");
+
             return {
                 ...state,
                 roundRunning: false
