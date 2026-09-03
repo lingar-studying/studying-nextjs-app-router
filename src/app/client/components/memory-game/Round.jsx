@@ -9,10 +9,7 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
 
 
     const length = gridLength * gridLength;
-    const [pointsPerRound, setPointsPerRound] = useState(PPR)
-    const decreasePoints = () => {
-        setPointsPerRound(pointsPerRound - 1);
-    }
+
     const [seconds, setSeconds] = useState(5);
     const [globalState, dispatch] = useReducer(roundReducer, {roundRunning: true,
     roundPoints: PPR });
@@ -60,7 +57,7 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
     }
     return (
         <>
-            <Box component={"h3"} textAlign={"center"}> points: {pointsPerRound} | new Points: {globalState?.roundPoints}</Box>
+            <Box component={"h3"} textAlign={"center"}> new Points: {globalState?.roundPoints}</Box>
             <Box component={"h4"} textAlign={"center"}> TIME: {seconds}</Box>
             <Box component={"div"} sx={{display: "flex", width: "100%", justifyContent: "center"}}>
                 <Box component={"div"}
