@@ -23,7 +23,7 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
     const roundDispatcher = useMemo(() => ({
         successQueue: () => dispatch({type: "SUCCESS_CHOICE"}),
         failureQueue: () => dispatch({type: "FAILURE_CHOICE"}),
-        startQueue: ()=> dispatch({type: "START_QUEUE"})
+        startQueue: () => dispatch({type: "START_QUEUE"})
 
 
     }), []);
@@ -102,13 +102,16 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
                              key={card.key}>
 
                             {card.isFlipped ?
-                                <strong>
-                                    {/*{(()=> {*/}
+                                <Box component={"div"} sx={{cursor: !freeze ? "initial" : "not-allowed",
+                                    width: "100%", height: "100%", justifyContent: "center", display: "flex", alignItems: "center"}}>
+                                    <strong>
+                                        {/*{(()=> {*/}
 
-                                    {/*   return (i + 1 > gridLength ? length - gridLength : i);*/}
-                                    {/*}) ()}*/}
-                                    {getIcon(card.iconIndex)}
-                                </strong>
+                                        {/*   return (i + 1 > gridLength ? length - gridLength : i);*/}
+                                        {/*}) ()}*/}
+                                        {getIcon(card.iconIndex)}
+                                    </strong>
+                                </Box>
                                 :
                                 <Box component={"div"} sx={{
                                     width: "100%", height: "100%",
