@@ -2,7 +2,7 @@
 
 import React, {use, useContext, useMemo, useReducer, useState} from "react";
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
-import {Box, Button, FormControl, TextField} from "@mui/material";
+import {Box, Button, FormControl, TextField, Typography} from "@mui/material";
 import Round from "@/app/client/components/memory-game/Round";
 import GlobalContext from "@/app/client/client-services/global-context";
 import Input from '@mui/material/Input';
@@ -85,8 +85,22 @@ const Game = (props) => {
             <p>round running? {globalState.roundRunning+""}</p>
 
 
-            {globalState?.roundRunning ?<Round cardLength={200} gridLength={globalState?.gridSize} gameDispatch = {dispatch}/>
-            :  <Button onClick={()=>dispatch({type: "START_NEXT_ROUND"})}>Ready To Start Round? </Button>
+
+            {globalState?.gameRunning ? (globalState?.roundRunning ?<Round cardLength={200} gridLength={globalState?.gridSize} gameDispatch = {dispatch}/>
+            :  <Button onClick={()=>dispatch({type: "START_NEXT_ROUND"})}>Ready To Start Round? </Button>)
+                :<Typography
+                    variant="h1"
+                    sx={{
+                        fontSize: '4rem',
+                        fontWeight: 900,
+                        // color: '#ff3333',
+                        textTransform: 'uppercase',
+                        textShadow: '3px 3px 0 #000, 6px 6px 0 grey, 9px 9px 15px rgba(0,0,0,0.8)',
+                        textAlign: "center"
+                    }}
+                >
+                    Game Over
+                </Typography>
             }
 
 
