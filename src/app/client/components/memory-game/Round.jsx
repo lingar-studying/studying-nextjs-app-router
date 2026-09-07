@@ -11,15 +11,22 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
     const length = gridLength * gridLength;
 
     const [seconds, setSeconds] = useState(5);
-    const [globalState, dispatch] = useReducer(roundReducer, {roundRunning: true,
-    roundPoints: PPR });
+    const [globalState, dispatch] = useReducer(roundReducer,
+        {
+            roundRunning: true,
+            roundPoints: PPR,
+            freeze: false
+        }
+    );
 
 
     const roundDispatcher = useMemo(() => ({
         successQueue: () => dispatch({type: "SUCCESS_CHOICE"}),
-        failureQueue: () => dispatch({type: "FAILURE_CHOICE"})
+        failureQueue: () => dispatch({type: "FAILURE_CHOICE"}),
+        startQueue: ()=> dispatch({type: "START_QUEUE"})
 
-    }),[]);
+
+    }), []);
 
 
     const {cardList, selectCard} = useCardList(gridLength, roundDispatcher) || [];
@@ -27,7 +34,7 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
     const intervalRef = useRef(null);
 
 
-    const [freeze, setFreeze] = useState(false);
+    const freeze = globalState?.freeze;
 
     useEffect(() => {
 
@@ -47,6 +54,10 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
             return;
         }
     }, [seconds])
+
+    useEffect(() => {
+        if (globalState?.roundPoints < 0) gameDispatch({type: "FINISH_GAME"});
+    })
 
     const getIcon = (i) => {
 

@@ -1,6 +1,6 @@
 'use client'
 
-import React, {use, useContext, useReducer, useState} from "react";
+import React, {use, useContext, useMemo, useReducer, useState} from "react";
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import {Box, Button, FormControl, TextField} from "@mui/material";
 import Round from "@/app/client/components/memory-game/Round";
@@ -38,7 +38,7 @@ const Game = (props) => {
 
     //reducer
     const [globalState, dispatch] = useReducer(gameReducer, {
-        gameRunning: false,
+        gameRunning: true,
         roundRunning: false,
         gridSize: 2
     });
@@ -54,6 +54,7 @@ const Game = (props) => {
 
     //EFFECTS
 
+    // const finishGame = useMemo(()=> dispatch({type: "FINISH_GAME"}))
 
 
     return (
@@ -79,6 +80,7 @@ const Game = (props) => {
             {guestName && <p>{guestName ?? ""} is playing</p>}
 
 
+            <p>game running? {globalState.gameRunning+""}</p>
 
             <p>round running? {globalState.roundRunning+""}</p>
 

@@ -31,6 +31,7 @@ export const gameReducer = (state, action) => {
         case "FINISH_GAME": {
             return {
                 ...state,
+                gameRunning: false
 
             }
         }
@@ -44,10 +45,11 @@ export const gameReducer = (state, action) => {
 
 export const roundReducer = (state, action) => {
     switch (action.type) {
-        case "RUN_QUEUE":
+        case "START_QUEUE":
             return {
                 ...state,
-                queueRunning: true
+                queueRunning: true,
+                freeze: false
             };
         case "FINISH_QUEUE":{
 
@@ -63,7 +65,7 @@ export const roundReducer = (state, action) => {
         }
         case "SUCCESS_CHOICE": {
             console.log("success CHOICE");
-            return ;
+            return state;
         }
         case "FAILURE_CHOICE": {
 
@@ -71,7 +73,8 @@ export const roundReducer = (state, action) => {
 
             return {
                 ...state,
-                roundPoints: state.roundPoints-1
+                roundPoints: state.roundPoints-1,
+                freeze: true
             }
         }
         default:

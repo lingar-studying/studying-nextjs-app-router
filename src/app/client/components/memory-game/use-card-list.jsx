@@ -85,10 +85,13 @@ const useCardList = (gridLength,  clientDispatcher) => {
                     } : cardItem));
 
                     setSelectedCard(null);
-                }, 1000);
+
+                    clientDispatcher?.startQueue();
+                }, 2000);
             }else{//success case
                 setSelectedCard(null);
                 clientDispatcher?.successQueue();
+                clientDispatcher?.startQueue();
                 const snd3 = new Audio("data:audio/wav;base64,UklGRlAAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YTAAAAAAAP8AAP8A/wD/AP8A/wD/AP8A/////wAAAP8A/wD/AP8A");
                 snd3.play();
 
