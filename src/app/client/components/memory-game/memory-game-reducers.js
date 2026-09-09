@@ -54,9 +54,13 @@ export const roundReducer = (state, action) => {
         case "FINISH_QUEUE":{
 
         }
-        case "SUCCESS_ROUND": {
+        case "SUCCESS_FINISH_ROUND": {
             console.log("success round");
-            return ;
+            return {
+                ...state,
+                roundRunning: false,
+                freeze: false
+            };
 
         }
         case "FAILURE_ROUND": {

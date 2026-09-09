@@ -2,7 +2,7 @@
 import {iconsStore} from "@/app/client/components/memory-game/constant-memory-game";
 import {useEffect, useState} from "react";
 
-const useCardList = (gridLength,  clientDispatcher) => {
+const useCardList = (gridLength, clientDispatcher) => {
 
     //my lovely states:
     const [cardList, setCardList] = useState([]);
@@ -18,9 +18,12 @@ const useCardList = (gridLength,  clientDispatcher) => {
 
 
         //we need to take length randoms from 5 numbers
+        //length is predefined propery for array.from
+
+        const sortingArray = Array.from({length: storeSize}, () => Math.random());
 
         const cardTypes = Array.from({length: storeSize}, (_, i) => i + 1)
-            .sort(() => Math.random() - 0.5)
+            .sort((a, b) => sortingArray[a - 1] - sortingArray[b - 1])
             .slice(0, length / 2);
 
         console.log("card type for " + length + " length:\n" + cardTypes);
@@ -63,13 +66,15 @@ const useCardList = (gridLength,  clientDispatcher) => {
 
     //functions:
     const selectCard = (card) => {
+        let updatedList = cardList.map(cardItem => cardItem.key === card.key ? {...cardItem, isFlipped: true} : cardItem);
+        setCardList(updatedList);
 
         // const indexOf = cardList.findIndex(item => item.key === card.key);
         if (!selectedCard) {
             const snd = new Audio("data:audio/wav;base64,UklGRlQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YTAAAAAAAP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A");
             snd.play();
             setSelectedCard(card)
-        } else {
+        } else {//case of 2nd choice
             if (selectedCard.iconIndex !== card.iconIndex) {
                 clientDispatcher?.failureQueue();
 
@@ -88,18 +93,28 @@ const useCardList = (gridLength,  clientDispatcher) => {
 
                     clientDispatcher?.startQueue();
                 }, 2000);
-            }else{//success case
+            } else {//success case
+
+                // setCardList(prev => prev.map(cardItem => cardItem.key === selectedCard.key ? {...cardItem, isFlipped: true} : cardItem));
                 setSelectedCard(null);
+
                 clientDispatcher?.successQueue();
-                clientDispatcher?.startQueue();
+
+                //checking if all flipped
+                const allFlipped = updatedList.every(i => i.isFlipped === true);
+
+                console.log("card list = ", updatedList);
+                if (allFlipped) clientDispatcher?.successFinishRound();
+                else clientDispatcher?.startQueue();
+
+
                 const snd3 = new Audio("data:audio/wav;base64,UklGRlAAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YTAAAAAAAP8AAP8A/wD/AP8A/wD/AP8A/////wAAAP8A/wD/AP8A");
                 snd3.play();
 
             }
 
         }
-        setCardList(prev => prev.map(cardItem => cardItem.key === card.key ? {...cardItem, isFlipped: true} : cardItem)
-        );
+
     }
 
     //outcome

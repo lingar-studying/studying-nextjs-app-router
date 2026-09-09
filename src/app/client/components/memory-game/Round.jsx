@@ -23,7 +23,8 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
     const roundDispatcher = useMemo(() => ({
         successQueue: () => dispatch({type: "SUCCESS_CHOICE"}),
         failureQueue: () => dispatch({type: "FAILURE_CHOICE"}),
-        startQueue: () => dispatch({type: "START_QUEUE"})
+        startQueue: () => dispatch({type: "START_QUEUE"}),
+        successFinishRound: () => dispatch({type: "SUCCESS_FINISH_ROUND"})
 
 
     }), []);
@@ -70,6 +71,7 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
         <>
             <Box component={"h3"} textAlign={"center"}> new Points: {globalState?.roundPoints}</Box>
             <Box component={"h4"} textAlign={"center"}> TIME: {seconds}</Box>
+            <p>Round of inner: {globalState?.roundRunning+""}</p>
             <Box component={"div"} sx={{display: "flex", width: "100%", justifyContent: "center"}}>
                 <Box component={"div"}
                      sx={{
