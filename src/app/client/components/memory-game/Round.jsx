@@ -37,6 +37,9 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
 
     const freeze = globalState?.freeze;
 
+
+    //EFFECTS
+
     useEffect(() => {
 
 
@@ -60,6 +63,12 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
         if (globalState?.roundPoints < 0) gameDispatch({type: "FINISH_GAME"});
     })
 
+    useEffect(()=>{
+        console.log("lingar - ", globalState.roundRunning)
+        if(!globalState.roundRunning)  gameDispatch({type:"ROUND_FINISHED"});
+
+
+    },[globalState.roundRunning])
     const getIcon = (i) => {
 
         const IconComp = iconsStore[i];

@@ -23,6 +23,7 @@ export const gameReducer = (state, action) => {
 
         }
         case "ROUND_FINISHED": {
+            console.log("finished game")
             return {
                 ...state,
                 roundRunning: false,
