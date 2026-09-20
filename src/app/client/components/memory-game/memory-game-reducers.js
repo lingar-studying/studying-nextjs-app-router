@@ -23,17 +23,40 @@ export const gameReducer = (state, action) => {
 
         }
         case "ROUND_FINISHED": {
-            console.log("finished game")
+            console.log("finished game");
+
+            const newState = { roundRunning: false};
+            if(action.payload.isSuccess){
+                newState.lastRoundPoints = action.payload.roundPoints;
+
+            }
             return {
                 ...state,
-                roundRunning: false,
+                ...newState
             }
+            //
+            // return {
+            //     ...state,
+            //     roundRunning: false
+            // }
         }
         case "FINISH_GAME": {
             return {
                 ...state,
                 gameRunning: false
 
+            }
+        }
+
+        case "ADD_POINTS": {
+            console.log("finished game");
+
+            const newState = { gamePoints: state.gamePoints + state.lastRoundPoints,
+            lastRoundPoints: 0};
+
+            return {
+                ...state,
+                ...newState
             }
         }
         default:
@@ -70,7 +93,7 @@ export const roundReducer = (state, action) => {
         }
         case "SUCCESS_CHOICE": {
             console.log("success CHOICE");
-            return state;
+            return {...state, roundPoints: state.roundPoints + state.pointPerQueue};
         }
         case "FAILURE_CHOICE": {
 

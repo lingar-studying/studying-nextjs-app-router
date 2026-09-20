@@ -15,7 +15,8 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
         {
             roundRunning: true,
             roundPoints: PPR,
-            freeze: false
+            freeze: false,
+            pointPerQueue: gridLength
         }
     );
 
@@ -64,8 +65,8 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
     })
 
     useEffect(()=>{
-        console.log("lingar - ", globalState.roundRunning)
-        if(!globalState.roundRunning)  gameDispatch({type:"ROUND_FINISHED"});
+        if(!globalState.roundRunning)  gameDispatch({type:"ROUND_FINISHED",
+            payload: {isSuccess: true, roundPoints: globalState?.roundPoints}});
 
 
     },[globalState.roundRunning])
@@ -78,7 +79,7 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
     }
     return (
         <>
-            <Box component={"h3"} textAlign={"center"}> new Points: {globalState?.roundPoints}</Box>
+            <Box component={"h3"} textAlign={"center"}> This Round Points: {globalState?.roundPoints}</Box>
             <Box component={"h4"} textAlign={"center"}> TIME: {seconds}</Box>
             <p>Round of inner: {globalState?.roundRunning+""}</p>
             <Box component={"div"} sx={{display: "flex", width: "100%", justifyContent: "center"}}>

@@ -1,6 +1,6 @@
 'use client'
 
-import React, {use, useContext, useMemo, useReducer, useState} from "react";
+import React, {use, useContext, useEffect, useMemo, useReducer, useState} from "react";
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import {Box, Button, FormControl, TextField, Typography} from "@mui/material";
 import Round from "@/app/client/components/memory-game/Round";
@@ -40,9 +40,12 @@ const Game = (props) => {
     const [globalState, dispatch] = useReducer(gameReducer, {
         gameRunning: true,
         roundRunning: false,
-        gridSize: 2
+        gridSize: 2,
+        gamePoints: 0,
+        lastRoundPoints: 0
     });
 
+    const [showSuccessMsg, setShowSuccessMsg] = useState(false);
 
     //FUNCTIONS
     const handleGuestNameSave = (e) => {
@@ -52,10 +55,25 @@ const Game = (props) => {
 
     }
 
+
     //EFFECTS
 
     // const finishGame = useMemo(()=> dispatch({type: "FINISH_GAME"}))
 
+    useEffect(()=>{
+
+        let runTimeout = null;
+        if(!globalState.roundRunning && globalState.gameRunning){
+            setShowSuccessMsg(true);
+           runTimeout = setTimeout(function (){
+                setShowSuccessMsg(false);
+                dispatch({type: "ADD_POINTS"})
+
+            },3000);
+        }
+
+        return ()=>clearTimeout(runTimeout);
+    }, [globalState.roundRunning])
 
     return (
         <Box component={"div"}>
@@ -83,6 +101,12 @@ const Game = (props) => {
             <p>game running? {globalState.gameRunning+""}</p>
 
             <p>round running? {globalState.roundRunning+""}</p>
+            <h1>Game Points: {globalState?.gamePoints}</h1>
+
+            {!globalState.roundRunning && globalState.gameRunning && showSuccessMsg &&
+            <p>Great You have finished the round with {globalState.lastRoundPoints}.
+                Your new score will be: {globalState.gamePoints} + {globalState.lastRoundPoints} =
+                {globalState.gamePoints +globalState.lastRoundPoints}</p>}
 
 
 

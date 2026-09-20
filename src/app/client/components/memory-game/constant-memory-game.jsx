@@ -116,5 +116,5 @@ export const iconsStore = [
     TimelineIcon,
     EventIcon
 ];
-export const PPR = 5;//point per round
+export const PPR = 20;//point per round
 export const TPM = 20//Seconds (time) per move
