@@ -1,6 +1,6 @@
 'use client'
 import React, {useEffect, useMemo, useReducer, useRef, useState} from 'react';
-import {Box} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import {iconsStore, PPR} from "@/app/client/components/memory-game/constant-memory-game";
 import useCardList from "@/app/client/components/memory-game/use-card-list";
 import {gameReducer, roundReducer} from "@/app/client/components/memory-game/memory-game-reducers";
@@ -140,6 +140,11 @@ const Round = ({gridLength, cardLength, gameDispatch}) => {
                         </Box>
                     ))}
                 </Box>
+            </Box>
+            <Box component={"div"}><h2>Admin utility</h2>
+            <Button variant={"contained"} onClick={roundDispatcher.successFinishRound}>Round Success</Button>
+            <Button variant={"contained"} color = "warning" onClick={()=>gameDispatch({type: "FINISH_GAME"})}>Finish Game</Button>
+
             </Box>
         </>
     )
