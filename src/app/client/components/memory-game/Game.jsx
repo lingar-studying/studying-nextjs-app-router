@@ -60,6 +60,7 @@ const Game = (props) => {
 
     // const finishGame = useMemo(()=> dispatch({type: "FINISH_GAME"}))
 
+    // if round not running and game does active - it should do calculation
     useEffect(()=>{
 
         let runTimeout = null;
@@ -112,7 +113,7 @@ const Game = (props) => {
 
             {globalState?.gameRunning ? (globalState?.roundRunning ?<Round cardLength={200} gridLength={globalState?.gridSize}
                                                                            gameDispatch = {dispatch}/>
-            :  <Button onClick={()=>dispatch({type: "START_NEXT_ROUND"})}>Ready To Start Round? </Button>)
+            :  <Button onClick={()=>dispatch({type: "START_NEXT_ROUND"})} disabled={showSuccessMsg}>Ready To Start Round? </Button>)
                 :<Typography
                     variant="h1"
                     sx={{
