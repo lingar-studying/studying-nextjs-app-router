@@ -22,8 +22,8 @@ const useCardList = (gridLength, clientDispatcher) => {
 
         const sortingArray = Array.from({length: storeSize}, () => Math.random());
 
-        const cardTypes = Array.from({length: storeSize}, (_, i) => i + 1)
-            .sort((a, b) => sortingArray[a - 1] - sortingArray[b - 1])
+        const cardTypes = Array.from({length: storeSize}, (_, i) => i )
+            .sort((a, b) => sortingArray[a ] - sortingArray[b ])
             .slice(0, length / 2);
 
         console.log("card type for " + length + " length:\n" + cardTypes);
