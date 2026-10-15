@@ -1,11 +1,13 @@
 import styles from "./page.module.css";
 import Link from "next/link";
+import PrimaryPocLog from "@/app/client/components/PrimaryPocLog";
 
 
 export default function Home() {
 
     return (
         <div >
+            <PrimaryPocLog/>
 
 
             <div style={{
