@@ -8,6 +8,7 @@ export const GameScheme = new mongoose.Schema({
     date: {type: Date, default: new Date()},
     ownerUserId: {ref: "User", type: mongoose.Schema.Types.ObjectId},
     rank: {type: Number, required: true},
-}, {timestamps: true});
+}, {timestamps: true, strict: true},
+    );
 
-export const RecordModel = mongoose.models.Record || mongoose.model("Record", GameScheme);
+export const RecordModel = mongoose.models.Record || mongoose.model("record", GameScheme);

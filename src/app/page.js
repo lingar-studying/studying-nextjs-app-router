@@ -16,7 +16,19 @@ export default function Home() {
 
             }}>
 
-                <h1>Basic Client Explanation</h1>
+                <p style={{
+                    margin: 0,
+                    fontSize: 12,
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase"
+                }}>Primary POC</p>
+                <h1 style={{
+                    margin: "8px 0 24px",
+                    fontSize: 36,
+                    lineHeight: 1.1
+                }}>God with us</h1>
+
+                <h2>Basic Client Explanation</h2>
 
                 <h2>This is Home page</h2>
                 <p>In Next App Router - everything is working by the folder structure.
