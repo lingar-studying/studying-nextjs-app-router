@@ -11,7 +11,7 @@ import {GameScheme} from "@/app/server/models/many-schemes";
  * insert some param that tell the action.
  * Method that clean all records.
  * Methods that generates 10 randoms records.
- * Method that clean randomly 50%
+ * Method that cut the records to the top 10 not more...
  *
  * @type {string}
  */
