@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import "./models/User"; // Explicitly register User model
-import  {RecordModel} from "@/app/server/models/many-schemes";
 
 
 const DATABASE_NAME = "NEXTJS_APP_ROUTER";
