@@ -28,7 +28,8 @@ test('records insertion logic and top 10 ranking', async () => {
                     level: 1,
                     gridCount: 0,
                     correctSelections: 0,
-                    playerName: `Player_${i}`
+                    playerName: `Player_${i}`,
+                    rank: 100
                 })
             });
         }
@@ -45,7 +46,7 @@ test('records insertion logic and top 10 ranking', async () => {
         });
     } finally {
         // d. After the test end, clean the db again
-        await RecordModel.deleteMany({});
+        // await RecordModel.deleteMany({});
     }
 });
 
@@ -102,3 +103,35 @@ test('concurrent or sequential insertion of two records', async () => {
         await RecordModel.deleteMany({});
     }
 });
+
+
+test('sequential insertion assigns correct ranks', async () => {
+  await RecordModel.deleteMany({});
+
+  const pointsList = [505, 22];
+
+  for (let i = 0; i < pointsList.length; i++) {
+    await fetch('http://localhost:3000/api/memory-game/record', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        accumulatedPoints: pointsList[i],
+        level: 1,
+        gridCount: 0,
+        correctSelections: 0,
+        ownerUserId: null,
+        playerName: `Avi3`,
+        rank: -555
+      })
+    });
+  }
+
+  const getRes = await fetch('http://localhost:3000/api/memory-game/record');
+  const records = await getRes.json();
+    console.log("records??? = ", records)
+  expect(records[0].rank).toBe(1);
+  expect(records[1].rank).toBe(2);
+
+  await RecordModel.deleteMany({});
+});
+

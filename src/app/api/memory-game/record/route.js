@@ -1,11 +1,9 @@
 import {
-    createEntity,
-    deleteEntity,
-    getAllEntities,
-    updateEntity
+    createEntity, deleteEntity, getAllEntities, updateEntity
 } from "@/app/server/generic-db-service";
 import {GameScheme, RecordModel} from "@/app/server/models/many-schemes";
 import {connectDB2} from "@/app/server/db-services";
+import {isARecordBetterThanB} from "@/app/global-services/utils";
 
 
 const entityName = "record";
@@ -15,8 +13,7 @@ export async function GET(req1) {
     const records = await getAllEntities(entityName, GameScheme);
     records.sort((a, b) => {
 
-        if (a.rank <= b.rank) return -1;
-        else return 0;
+        if (a.rank <= b.rank) return -1; else return 0;
     });
 
 
@@ -24,6 +21,84 @@ export async function GET(req1) {
 }
 
 export async function POST(req) {
+
+
+
+    try {
+        await connectDB2();
+
+        const newRecord = await req.json();
+
+        const records = await RecordModel.find({});
+
+        if (records.length == 0){
+            newRecord.rank = 1;
+            await RecordModel.create(newRecord);
+            return Response.json({success: true});
+        }
+
+        // Sort them by rank from top to low.
+        records.sort((a, b) => {
+
+            if (b.rank <= a.rank) return -1; else return 0;
+        });
+
+
+        let deleteId = null;
+        let testIndex = 0;
+        if (records.length == 10) {
+            if (isARecordBetterThanB(newRecord, records[0])) {
+                deleteId = records[0]._id;
+                newRecord.rank = 10;
+                testIndex++;
+            } else {
+                return Response.json({success: false});
+            }
+        }
+
+
+        // iterate on the last to the top. on each check if the points of the new record vs the points of the current...
+        for (testIndex; testIndex < records.length; testIndex++) {
+
+            const current = records[testIndex];
+            // if current >= new - leave the state and stop. Else the new is better - replace them in the rank value.
+            if (isARecordBetterThanB(newRecord, current)) {
+
+                //adding the new to the list
+
+                // if (record?.accumulatedPoints > current.accumulatedPoints) {
+                const tempRank = current.rank;
+                current.rank++;
+                newRecord.rank = tempRank;
+            } else {
+                newRecord.rank = current.rank+1;
+                break;
+            }
+        }
+        //saving the new list
+        await RecordModel.bulkSave(records);
+        //saving the new list
+        await RecordModel.create(newRecord);
+        if(deleteId) await RecordModel.deleteOne({_id: deleteId});
+
+        return Response.json({success: true});
+    } catch (e) {
+        return Response.json({error: e.message}, {status: 500})
+    }
+
+
+}
+
+export async function PUT(req) {
+    const apartment = await req.json();
+
+    const updatedApartment = await updateEntity(apartment, entityName);
+
+    return Response.json(updatedApartment);
+
+}
+
+export async function oldPOST(req) {
 
     /**
      * ALGO:
@@ -46,8 +121,7 @@ export async function POST(req) {
         // Sort them by rank.
         records.sort((a, b) => {
 
-            if (a.rank <= b.rank) return -1;
-            else return 0;
+            if (a.rank <= b.rank) return -1; else return 0;
         });
 
         //some cleaning to the data. - if there are more than ten - cut the larger than 10. (use substr for removing more than 10)
@@ -86,7 +160,6 @@ export async function POST(req) {
                 // }
 
 
-
             } else {
                 break;
             }
@@ -98,14 +171,13 @@ export async function POST(req) {
             if (leftRecords.length == 0) record.rank = 1;
             const recordDbDoc = new RecordModel(record);
             records.push(recordDbDoc);
-            if(deleteId){
+            if (deleteId) {
                 await RecordModel.deleteOne({_id: deleteId});//assume it will be failed should be {_id: current._id}
             }
         }
 
-            //saving the new list
-            await RecordModel.bulkSave(records);
-
+        //saving the new list
+        await RecordModel.bulkSave(records);
 
 
         // const newRecord = await createEntity(record, entityName, GameScheme);
@@ -119,16 +191,6 @@ export async function POST(req) {
 
 }
 
-export async function PUT(req) {
-    const apartment = await req.json();
-
-    const updatedApartment = await updateEntity(apartment, entityName);
-
-    return Response.json(updatedApartment);
-
-}
-
-
 export async function DELETE(req) {
     const reqData = await req.json();
 
@@ -139,3 +201,4 @@ export async function DELETE(req) {
     return Response.json(result);
 
 }
+
