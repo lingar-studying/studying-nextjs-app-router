@@ -1,12 +1,13 @@
 'use client'
 
-import React, {use, useContext, useEffect, useMemo, useReducer, useState} from "react";
+import React, {use, useContext, useEffect, useMemo, useReducer, useRef, useState} from "react";
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import {Box, Button, FormControl, TextField, Typography} from "@mui/material";
 import Round from "@/app/client/components/memory-game/Round";
 import GlobalContext from "@/app/client/client-services/global-context";
 import Input from '@mui/material/Input';
 import {gameReducer} from "@/app/client/components/memory-game/memory-game-reducers";
+import axios from "axios";
 
 
 /**
@@ -76,6 +77,36 @@ const Game = (props) => {
         return ()=>clearTimeout(runTimeout);
     }, [globalState.roundRunning])
 
+
+    //effects when the gameFinished
+    const firstPageStartup = useRef(true);
+    useEffect(()=>{
+
+        const saveRecord = async ()=>{
+            console.log("saving record...");
+            const record = {
+                accumulatedPoints: globalState.gamePoints,
+                level: 100,
+                gridCount: globalState.gridSize,
+                correctSelections: 0,
+                ownerUserId: loggedUser?._id,
+                playerName: loggedUser ? loggedUser.name: guestName,
+                rank : -555
+            }
+            await axios.post(`/api/memory-game/record`, record);
+        }
+
+        if(firstPageStartup.current){
+            firstPageStartup.current = false;
+            console.log("we here ? ")
+            return;
+        }
+        //game finished
+        if(!globalState.gameRunning){
+            saveRecord();
+
+        }
+    },[globalState.gameRunning]);
     return (
         <Box component={"div"}>
             <p> {loggedUser && `user logged ${loggedUser.name}`}</p>

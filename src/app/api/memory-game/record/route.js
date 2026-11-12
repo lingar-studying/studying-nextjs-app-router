@@ -23,7 +23,6 @@ export async function GET(req1) {
 export async function POST(req) {
 
 
-
     try {
         await connectDB2();
 
@@ -31,7 +30,7 @@ export async function POST(req) {
 
         const records = await RecordModel.find({});
 
-        if (records.length == 0){
+        if (records.length == 0) {
             newRecord.rank = 1;
             await RecordModel.create(newRecord);
             return Response.json({success: true});
@@ -71,7 +70,7 @@ export async function POST(req) {
                 current.rank++;
                 newRecord.rank = tempRank;
             } else {
-                newRecord.rank = current.rank+1;
+                newRecord.rank = current.rank + 1;
                 break;
             }
         }
@@ -79,11 +78,14 @@ export async function POST(req) {
         await RecordModel.bulkSave(records);
         //saving the new list
         await RecordModel.create(newRecord);
-        if(deleteId) await RecordModel.deleteOne({_id: deleteId});
+        if (deleteId) await RecordModel.deleteOne({_id: deleteId});
 
         return Response.json({success: true});
     } catch (e) {
-        return Response.json({error: e.message}, {status: 500})
+        return Response.json({
+            error: e,
+            errorMessage: e.message
+        }, {status: 500})
     }
 
 

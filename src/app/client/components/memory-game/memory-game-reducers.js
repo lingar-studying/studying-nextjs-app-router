@@ -13,9 +13,7 @@ export const gameReducer = (state, action) => {
                 gridSize: state.gridSize+1
 
             };
-        case "GAME_OVER": {
 
-        }
         case "WAITING_APPROVAL": {
 
         }
