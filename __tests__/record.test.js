@@ -135,3 +135,75 @@ test('sequential insertion assigns correct ranks', async () => {
   await RecordModel.deleteMany({});
 });
 
+
+test('inserts new record into the middle of the leaderboard', async () => {
+  try {
+    await RecordModel.deleteMany({});
+    await RecordModel.create({ accumulatedPoints: 100, rank: 1, playerName: 'High' });
+    await RecordModel.create({ accumulatedPoints: 50, rank: 2, playerName: 'Low' });
+
+    const res = await fetch('http://localhost:3000/api/memory-game/record', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accumulatedPoints: 75, rank: -555, playerName: 'Mid' })
+    });
+
+    const data = await res.json();
+    expect(data.success).toBe(true);
+
+    const getRes = await fetch('http://localhost:3000/api/memory-game/record');
+    const records = await getRes.json();
+
+    expect(records.find(r => r.playerName === 'High').rank).toBe(1);
+    expect(records.find(r => r.playerName === 'Mid').rank).toBe(2);
+    expect(records.find(r => r.playerName === 'Low').rank).toBe(3);
+  } finally {
+    await RecordModel.deleteMany({});
+  }
+});
+
+test('rejects new record when leaderboard is full and score is too low', async () => {
+  try {
+    await RecordModel.deleteMany({});
+
+    for (let i = 1; i <= 10; i++) {
+      await RecordModel.create({ accumulatedPoints: i * 10, rank: 11 - i, playerName: `Player_${i}` });
+    }
+
+    const res = await fetch('http://localhost:3000/api/memory-game/record', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accumulatedPoints: 5, rank: -555, playerName: 'LowScore' })
+    });
+
+    const data = await res.json();
+    expect(data.success).toBe(false);
+
+    const records = await RecordModel.find({});
+    expect(records.length).toBe(10);
+  } finally {
+    await RecordModel.deleteMany({});
+  }
+});
+
+test('handles score tie correctly', async () => {
+  try {
+    await RecordModel.deleteMany({});
+    await RecordModel.create({ accumulatedPoints: 100, rank: 1, playerName: 'Player1' });
+
+    const res = await fetch('http://localhost:3000/api/memory-game/record', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accumulatedPoints: 100, rank: -555, playerName: 'Player2' })
+    });
+
+    const data = await res.json();
+    expect(data.success).toBe(true);
+
+    const records = await RecordModel.find({});
+    expect(records.length).toBe(2);
+  } finally {
+    await RecordModel.deleteMany({});
+  }
+});
+
